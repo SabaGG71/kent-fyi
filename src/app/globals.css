@@ -109,7 +109,8 @@ html.lenis body {
 [data-webgl="off"] [data-photo-fallback] {
   opacity: 1;
 }
-[data-webgl="on"] [data-smoke] {
+[data-webgl="on"] [data-smoke],
+[data-webgl="on"] [data-vines] {
   opacity: 1;
 }
 

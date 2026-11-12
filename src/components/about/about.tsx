@@ -1,61 +1,65 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, useRef } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { VinesCanvas, VINES, type VinesFx } from "./vines-canvas";
+import { SIGNATURE } from "./signature-data";
+import { InkHeading } from "@/components/site/ink-heading";
 
-/** the pictures that open up inside the sentence, and how wide each one is */
-const CHIPS = {
-  kent: { src: "/about/kent-terrace.webp", width: "1.9em" },
-  podcast: { src: "https://i.ytimg.com/vi/WtfVjOL8TiU/maxresdefault.jpg", width: "1.55em" },
-  lens: { src: "https://images.unsplash.com/photo-1582994254571-52c62d96ebab?w=1200&h=1200&fit=crop&q=80", width: "1.55em" },
-};
+/** the opening line: the first sentence in full cream, the second a step back */
+const LEAD = ["It started with a coffee cart on the back of a bike.", "Nobody knew it existed."];
 
-type Chip = { chip: keyof typeof CHIPS; tail?: string };
-
-/** one sentence, with a picture after a few of its words */
-const STATEMENT: (string | Chip)[] = [
-  "I'm Kent",
-  { chip: "kent", tail: "." },
-  "I bet on myself and I build what lasts. Today that's LocalEyes Growth",
-  { chip: "podcast", tail: "," },
-  "helping coffee carts, dessert carts and mobile bars get found",
-  { chip: "lens" },
-  "on Google and booked for more events.",
+const STORY = [
+  "That was 2014. I spent the year fixing burst water lines and popped circuits at farmers markets, then closed it. I blamed the equipment. The truth was simpler: outside the few dozen people who walked past on a Saturday, nobody knew I was there.",
+  "So I started over. Zane and I spent six years building VOILA, an instant coffee that made The Wall Street Journal and Forbes. We learned ecommerce the hard way: conversion rates, brand, and earning trust before anyone tastes a cup.",
+  "LocalEyes Growth is the thing I needed in 2014. We only work with coffee carts, dessert carts and mobile bars. You rarely lose to the better cart. You lose to the one that shows up first.",
 ];
 
-/** a word behind frosted glass: faint, with a soft glow right where it sits */
-const FROSTED = { color: "rgba(255, 243, 232, 0.12)", textShadow: "0 0 12px rgba(255, 243, 232, 0.35)" };
-const CLEAR = { color: "rgba(255, 243, 232, 1)", textShadow: "0 0 0px rgba(255, 243, 232, 0)" };
+const PRESS = ["The Wall Street Journal", "Forbes", "Gear Patrol", "Uncrate"];
 
 /**
- * About Kent in one sentence, set big. When it scrolls into view it comes out of the frost word by word,
- * and where it names Kent, LocalEyes and being found a photo opens out of the line like a pill, frosted
- * at first and clearing as it opens. Hover a pill and it swells up out of the text for a closer look.
- * It plays once, on arrival, so there's no long scroll. Without JS, or with reduced motion, it's all there.
+ * About, set like a magazine page. The opening line fills in with the scroll like ink. The photo opens out
+ * of its frame and lives: a depth map lets the near vine leaves slide a touch faster than the two of them
+ * as you scroll, and sway in a breeze, while the photo itself stays sharp. The story sits beside it, signed
+ * off with one line and the press VOILA earned. One screen and a bit, nothing pinned.
  */
 export function About() {
   const root = useRef<HTMLElement>(null);
+  const photo = useRef<HTMLImageElement>(null);
+  const fx = useRef<VinesFx>({ drift: 0, zoom: 1 });
+
+  const onStatus = (status: "on" | "off") => root.current?.setAttribute("data-webgl", status);
 
   useGSAP(
     () => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const tl = gsap.timeline({ paused: true });
-      let t = 0;
-      gsap.utils.toArray<HTMLElement>("[data-word], [data-chip]").forEach((el) => {
-        if (el.hasAttribute("data-chip")) {
-          const [photo, veil] = el.children;
-          tl.fromTo(el, { clipPath: "inset(0% 50% 0% 50% round 999px)" }, { clipPath: "inset(0% 0% 0% 0% round 999px)", duration: 0.55, ease: "expo.out" }, t)
-            .fromTo(photo, { scale: 1.45, filter: "blur(14px) saturate(1.3)" }, { scale: 1, filter: "blur(0px) saturate(1)", duration: 0.7, ease: "power3.out" }, t)
-            .fromTo(veil, { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power2.out" }, t);
-          t += 0.04;
-        } else {
-          tl.fromTo(el, FROSTED, { ...CLEAR, duration: 0.4, ease: "power2.out" }, t);
-          t += 0.012;
-        }
-      });
-      // quick: the whole sentence is clear in under a second, started just as it comes up the screen
-      ScrollTrigger.create({ trigger: "[data-line]", start: "top 85%", once: true, onEnter: () => tl.play() });
+      const q = gsap.utils.selector(root);
+      const arrive = (trigger: Element, start = "top 82%") => ({ trigger, start, once: true });
+
+      // the photo opens out of its frame and settles
+      const frame = q("[data-frame]")[0];
+      gsap.fromTo(
+        frame,
+        { clipPath: "inset(12% 14% 12% 14% round 4px)" },
+        { clipPath: "inset(0% 0% 0% 0% round 4px)", duration: 1.6, ease: "expo.out", scrollTrigger: arrive(frame) },
+      );
+      gsap.fromTo(fx.current, { zoom: 1.18 }, { zoom: 1, duration: 2.2, ease: "expo.out", scrollTrigger: arrive(frame) });
+      // and its near leaves slide past the two of them as it travels up the screen
+      gsap.fromTo(fx.current, { drift: -1 }, { drift: 1, ease: "none", scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true } });
+
+      // the story and the sign-off rise in, a beat apart
+      const story = q("[data-story]")[0];
+      gsap.from(q("[data-rise]"), { y: 28, opacity: 0, duration: 1.1, ease: "expo.out", stagger: 0.08, scrollTrigger: arrive(story, "top 80%") });
+      gsap.from(q("[data-rule]"), { scaleX: 0, duration: 1.2, ease: "expo.out", scrollTrigger: arrive(story, "top 80%") });
+
+      // his name writes itself in, left to right, like a pen across the page
+      const signature = q("[data-signature]")[0];
+      gsap.fromTo(
+        signature,
+        { clipPath: "inset(-20% 100% -20% 0%)" },
+        { clipPath: "inset(-20% 0% -20% 0%)", duration: 1.6, ease: "power2.inOut", scrollTrigger: arrive(signature, "top 88%") },
+      );
     },
     { scope: root },
   );
@@ -65,56 +69,87 @@ export function About() {
       ref={root}
       id="about"
       aria-labelledby="about-title"
-      className="relative bg-coal pt-[clamp(112px,15vw,200px)] pr-[var(--pad-r)] pb-[clamp(96px,12vw,160px)] pl-[var(--pad-l)]"
+      className="relative bg-coal pt-[clamp(104px,11vw,168px)] pr-[var(--pad-r)] pb-[clamp(96px,10vw,152px)] pl-[var(--pad-l)]"
     >
-      <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-8">
-        <h2 id="about-title" className="text-[12px] font-semibold tracking-[0.02em] text-cream/60 uppercase lg:col-span-3 lg:pt-[0.9em]">
+      <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-12 lg:gap-x-8">
+        <p className="text-[12px] font-semibold tracking-[0.02em] text-cream/60 uppercase lg:col-span-3 lg:pt-[0.7em]">
+          <span aria-hidden className="mr-2 inline-block size-[6px] -translate-y-px rounded-full bg-ember align-middle" />
           About
-        </h2>
-        <p
-          data-line
-          className="text-[clamp(28px,3.6vw,56px)] leading-[1.12] font-semibold tracking-[-0.03em] text-pretty text-cream [font-variation-settings:'wdth'_108] lg:col-span-9"
-        >
-          {STATEMENT.map((part, k) =>
-            typeof part === "string" ? (
-              <Fragment key={k}>
-                {k > 0 && " "}
-                {part.split(" ").map((word, i) => (
-                  <Fragment key={i}>
-                    {i > 0 && " "}
-                    <span data-word className="inline-block">
-                      {word}
-                    </span>
-                  </Fragment>
-                ))}
-              </Fragment>
-            ) : (
-              <Fragment key={k}>
-                {/* swells up out of the line on hover, for a closer look */}
-                <span
-                  aria-hidden
-                  data-chip
-                  style={{ width: CHIPS[part.chip].width }}
-                  className="relative ml-[0.2em] inline-block h-[0.73em] overflow-hidden rounded-full bg-[#1c0705] transition-[scale,box-shadow] duration-700 ease-out-expo hover:z-10 hover:scale-[2.4] hover:shadow-[0_30px_60px_-20px_rgb(0_0_0/0.8)] motion-reduce:transition-none"
-                >
-                  <span className="absolute inset-0 block">
-                    {/* once open, each one keeps drifting a little, like a clip on loop */}
-                    <span className="drift absolute inset-0 block">
-                      <Image src={CHIPS[part.chip].src} alt="" fill loading="eager" sizes="(min-width: 1024px) 320px, 160px" className="object-cover" />
-                    </span>
-                  </span>
-                  {/* the frost it opens out of */}
-                  <span className="absolute inset-0 bg-cream/30 opacity-0" />
-                </span>
-                {part.tail && (
-                  <span data-word className="inline-block">
-                    {part.tail}
-                  </span>
-                )}
-              </Fragment>
-            ),
-          )}
         </p>
+        {/* fills in with the scroll, like ink */}
+        <InkHeading
+          id="about-title"
+          parts={[{ text: LEAD[0] }, { text: LEAD[1], tone: "soft" }]}
+          className="text-[clamp(34px,4.4vw,72px)] leading-[1.04] lg:col-span-9"
+        />
+      </div>
+
+      <div className="mt-[clamp(48px,6vw,96px)] grid grid-cols-1 gap-y-10 lg:grid-cols-12 lg:gap-x-8">
+        {/* the photograph, alive: it holds its place while the story beside it is read */}
+        <figure className="lg:sticky lg:top-[14vh] lg:col-span-7 lg:self-start">
+          <div data-frame className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-[#1c0705] sm:aspect-[1345/889]">
+            <Image
+              ref={photo}
+              data-photo-fallback
+              src={VINES.src}
+              alt="Kent and a friend under autumn grapevines, arms out, in red work gloves"
+              fill
+              quality={90}
+              sizes="(min-width: 1024px) 56vw, 100vw"
+              className="object-cover transition-opacity duration-700"
+              style={{ objectPosition: `${VINES.position[0] * 100}% ${VINES.position[1] * 100}%` }}
+            />
+            <VinesCanvas data-vines fx={fx} source={photo} onStatus={onStatus} className="absolute inset-0 size-full opacity-0 transition-opacity duration-700" />
+            <div aria-hidden className="grain pointer-events-none absolute inset-0" />
+          </div>
+          <figcaption className="mt-4 flex items-center justify-between text-[12px] font-semibold tracking-[0.02em] text-cream/55 uppercase">
+            <span>Autumn, in the vines</span>
+            <span>Off the clock</span>
+          </figcaption>
+        </figure>
+
+        <div data-story className="lg:col-span-5 lg:col-start-8">
+          <div className="space-y-6">
+            {STORY.map((paragraph, i) => (
+              <p
+                key={i}
+                data-rise
+                className={
+                  i === 0
+                    ? "text-[19px] leading-[1.55] font-medium tracking-[-0.01em] text-cream md:text-[21px]"
+                    : "text-[16px] leading-[1.65] text-cream/70 md:text-[17px]"
+                }
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-10">
+            <span data-rule aria-hidden className="block h-px origin-left bg-cream/15" />
+            <p data-rise className="mt-8 font-display text-[clamp(28px,2.6vw,40px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance text-cream">
+              I know what an empty calendar feels like.
+            </p>
+            <svg data-signature role="img" aria-label="Signed, Kent" viewBox={SIGNATURE.viewBox} className="mt-6 h-[clamp(64px,5.6vw,84px)] w-auto fill-cream">
+              <path d={SIGNATURE.d} />
+            </svg>
+            <p data-rise className="mt-3 text-[12px] font-semibold tracking-[0.02em] text-cream/60 uppercase">
+              Kent Sheridan, co-founder of LocalEyes Growth
+            </p>
+          </div>
+
+          {/* the press VOILA earned */}
+          <div data-rise className="mt-12">
+            <p className="text-[12px] font-semibold tracking-[0.02em] text-cream/45 uppercase">VOILA, written up in</p>
+            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-display text-[clamp(18px,1.42vw,21px)] leading-[1.3] tracking-[-0.02em] text-cream/55">
+              {PRESS.map((name) => (
+                <li key={name} className="transition-colors duration-500 hover:text-cream">
+                  {name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
