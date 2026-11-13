@@ -21,12 +21,18 @@
   /* the page margin and the gutter, raw and narrow, like a designer's index */
   --m: max(clamp(16px, 1.7vw, 24px), env(safe-area-inset-left));
   --g: clamp(12px, 1.25vw, 20px);
+  /* a first visit is printed in Lavender (DEFAULT_PROOF in components/kent/proofs.tsx) */
+  --print-ink: #46469a;
+  --print-flood: #b9ddf2;
+  --band: url("/kent/proofs/lavender.webp");
+}
+
+/* the five proofs (see components/kent/proofs.tsx) */
+:root[data-proof="fyi"] {
   --print-ink: #0b0e10;
   --print-flood: #bed3d8;
   --band: url("/kent/proofs/fyi.webp");
 }
-
-/* the five proofs (see components/kent/proofs.tsx) */
 :root[data-proof="blue"] {
   --print-ink: #063c5a;
   --print-flood: #cfe4ec;

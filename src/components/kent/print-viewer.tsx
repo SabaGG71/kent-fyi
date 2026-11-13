@@ -4,7 +4,7 @@ import { useEffect, useImperativeHandle, useRef, useState, type Ref } from "reac
 import { gsap } from "@/lib/gsap";
 import { PRINTS } from "@/lib/kent";
 import { createPrinter, type Rgb } from "./print-gl";
-import { proofOf, rgb, useProof } from "./proofs";
+import { DEFAULT_PROOF, proofOf, rgb, useProof } from "./proofs";
 import { Stir } from "./stir";
 
 /** how long a change of picture takes to grow through the marble */
@@ -25,7 +25,7 @@ export function PrintViewer({ index, className, ref }: { index: number; classNam
   const canvas = useRef<HTMLCanvasElement>(null);
   const proof = useProof();
   const [status, setStatus] = useState<"on" | "off" | null>(null);
-  const fx = useRef({ from: index, to: index, mix: 1, busy: 0, ink: rgb(proofOf("fyi").ink) as Rgb, flood: rgb(proofOf("fyi").flood) as Rgb });
+  const fx = useRef({ from: index, to: index, mix: 1, busy: 0, ink: rgb(proofOf(DEFAULT_PROOF).ink) as Rgb, flood: rgb(proofOf(DEFAULT_PROOF).flood) as Rgb });
   const stir = useRef(new Stir());
   const wake = useRef<() => void>(() => {});
   const reduce = useRef(false);

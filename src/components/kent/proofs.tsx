@@ -18,6 +18,8 @@ export const PROOFS = [
 ] as const;
 
 export type ProofKey = (typeof PROOFS)[number]["key"];
+/** the proof a first visit is printed in */
+export const DEFAULT_PROOF: ProofKey = "lavender";
 const KEY = "kentfyi:proof";
 const listeners = new Set<() => void>();
 
@@ -25,7 +27,7 @@ export const rgb = (hex: string): Rgb => [parseInt(hex.slice(1, 3), 16) / 255, p
 
 const read = (): ProofKey => {
   const v = document.documentElement.dataset.proof;
-  return PROOFS.some((p) => p.key === v) ? (v as ProofKey) : "fyi";
+  return PROOFS.some((p) => p.key === v) ? (v as ProofKey) : DEFAULT_PROOF;
 };
 
 function subscribe(listener: () => void) {
@@ -45,7 +47,7 @@ export function setProof(key: ProofKey) {
   listeners.forEach((l) => l());
 }
 
-export const useProof = () => useSyncExternalStore(subscribe, read, () => "fyi" as ProofKey);
+export const useProof = () => useSyncExternalStore(subscribe, read, () => DEFAULT_PROOF);
 export const proofOf = (key: ProofKey) => PROOFS.find((p) => p.key === key) ?? PROOFS[0];
 
 /** a row of five small proofs: each a square split between its ink and its flood */
