@@ -156,21 +156,6 @@
   }
 }
 
-/* The preloader covers the page from the first paint. It's gone at once when it has played this session,
-   and if its script never runs it fades out by itself. */
-@keyframes preloader-failsafe {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-[data-preloader] {
-  animation: preloader-failsafe 0.5s ease 7s forwards;
-}
-[data-intro="seen"] [data-preloader] {
-  display: none;
-}
-
 /* The hero's opening, first frame: the lines below their edges, the picture closed, the small print out.
    The opening (hero.tsx) plays from here; if it never gets to, everything shows itself after a while. */
 @keyframes hero-failsafe {

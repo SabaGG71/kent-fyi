@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { FYIS, PRINTS } from "@/lib/kent";
-import { INTRO_EVENT } from "./preloader";
 import { PrintViewer, type ViewerHandle } from "./print-viewer";
 import { ProofPicker } from "./proofs";
 import { useTbilisiTime } from "./time";
@@ -30,7 +29,7 @@ const DEMO: [number, number][] = [
  * it. Point at a line and its picture grows in through the marble. Until someone does, the hero turns
  * through the lines by itself, slowly.
  *
- * The opening, once the marbled paper has lifted: the lines rise into place one after another and the
+ * The opening, as the page loads: the lines rise into place one after another and the
  * picture opens from the bottom; then one stroke across the picture shows it can be marbled.
  */
 export function Hero() {
@@ -62,13 +61,10 @@ export function Hero() {
       setStarted(true);
       demo = window.setTimeout(() => viewer.current?.demo(DEMO, 1.6), 2200);
     };
-    // the opening waits for the marbled paper to start lifting (it may already have gone)
-    if (document.documentElement.dataset.intro === "seen") begin();
-    else window.addEventListener(INTRO_EVENT, begin, { once: true });
+    begin();
     return () => {
       io.disconnect();
       window.clearTimeout(demo);
-      window.removeEventListener(INTRO_EVENT, begin);
     };
   }, []);
 
