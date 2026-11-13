@@ -1,64 +1,198 @@
 @import "tailwindcss";
 
+/*
+  kent.fyi. One sheet of paper (the grey of Kent's own portfolio deck), ink from his FYI artwork, the blue
+  of a hyperlink, and his marble printed in five proofs.
+*/
+
 @theme inline {
-  --color-coal: var(--coal);
-  --color-ember: var(--ember);
-  --color-cream: var(--cream);
-  --color-background: var(--coal);
-  --color-foreground: var(--cream);
-  --font-display: var(--font-baskervville);
-  --font-sans: var(--font-mona);
+  --color-paper: #ebeae7;
+  --color-ink: #0b0e10;
+  --color-link: #2233ff;
+  /* the proof picked in the hero: its ink and its flood colour */
+  --color-print-ink: var(--print-ink);
+  --color-print-flood: var(--print-flood);
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-fragment), ui-monospace, monospace;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 :root {
-  /* Kent's red wall (faded), oxblood shadows, warm paper white */
-  --coal: #120504;
-  --ember: #ff5a1f;
-  --cream: #fff3e8;
-
-  --pad: 18px;
-  --header-h: 68px;
-  /* the page's gutters, kept clear of notches and the home bar (viewport-fit: cover) */
-  --pad-l: max(var(--pad), env(safe-area-inset-left));
-  --pad-r: max(var(--pad), env(safe-area-inset-right));
-  --pad-b: calc(var(--pad) + env(safe-area-inset-bottom));
+  /* the page margin and the gutter, raw and narrow, like a designer's index */
+  --m: max(clamp(16px, 1.7vw, 24px), env(safe-area-inset-left));
+  --g: clamp(12px, 1.25vw, 20px);
+  --print-ink: #0b0e10;
+  --print-flood: #bed3d8;
+  --band: url("/kent/proofs/fyi.webp");
 }
 
-@media (min-width: 768px) {
-  :root {
-    --pad: 32px;
-    --header-h: 76px;
+/* the five proofs (see components/kent/proofs.tsx) */
+:root[data-proof="blue"] {
+  --print-ink: #063c5a;
+  --print-flood: #cfe4ec;
+  --band: url("/kent/proofs/blue.webp");
+}
+:root[data-proof="mint"] {
+  --print-ink: #0c4b5c;
+  --print-flood: #a8e0cf;
+  --band: url("/kent/proofs/mint.webp");
+}
+:root[data-proof="peach"] {
+  --print-ink: #2b8d96;
+  --print-flood: #f3c5a3;
+  --band: url("/kent/proofs/peach.webp");
+}
+:root[data-proof="lavender"] {
+  --print-ink: #46469a;
+  --print-flood: #b9ddf2;
+  --band: url("/kent/proofs/lavender.webp");
+}
+
+/*
+  The line lit in the hero is printed in the chosen proof: Kent's marble shows through the letters under
+  a wash of its ink, drifting slowly, like the marble is still floating. Pick another proof and the line
+  re-inks with it.
+*/
+@keyframes marble-drift {
+  to {
+    background-position:
+      0 0,
+      -900px 40%;
+  }
+}
+.marbled {
+  background:
+    linear-gradient(color-mix(in srgb, var(--print-ink) 58%, transparent), color-mix(in srgb, var(--print-ink) 58%, transparent)),
+    var(--band) 0 40% / 900px auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marbled {
+    animation: marble-drift 14s linear infinite;
   }
 }
 
-@media (min-width: 1280px) {
-  :root {
-    --pad: 40px;
-  }
-}
 
 @layer base {
   html {
-    @apply bg-coal font-sans text-cream;
-    color-scheme: dark;
+    @apply bg-paper font-sans text-ink;
+    color-scheme: light;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    @apply min-h-svh bg-coal text-cream;
+    @apply min-h-svh bg-paper text-ink;
   }
   ::selection {
-    background: var(--ember);
-    color: var(--cream);
+    background: var(--color-link);
+    color: var(--color-paper);
   }
   :focus-visible {
-    outline: 1.5px solid var(--cream);
+    outline: 1.5px solid var(--color-link);
     outline-offset: 3px;
   }
+}
+
+/* the particulars: figure numbers, labels, the time */
+@utility mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+/* a print's crop marks: at each corner two hairlines in line with the trim edges, outside the frame,
+   stopping short of it, as a printer marks where to cut */
+@utility crop-marks {
+  --o: 16px;
+  --len: 10px;
+  &::before,
+  &::after {
+    --line: linear-gradient(var(--color-ink), var(--color-ink));
+    content: "";
+    position: absolute;
+    inset: calc(var(--o) * -1);
+    pointer-events: none;
+    z-index: 1;
+  }
+  &::before {
+    background:
+      var(--line) left 0 top var(--o) / var(--len) 1px no-repeat,
+      var(--line) left var(--o) top 0 / 1px var(--len) no-repeat,
+      var(--line) right 0 top var(--o) / var(--len) 1px no-repeat,
+      var(--line) right var(--o) top 0 / 1px var(--len) no-repeat;
+  }
+  &::after {
+    background:
+      var(--line) left 0 bottom var(--o) / var(--len) 1px no-repeat,
+      var(--line) left var(--o) bottom 0 / 1px var(--len) no-repeat,
+      var(--line) right 0 bottom var(--o) / var(--len) 1px no-repeat,
+      var(--line) right var(--o) bottom 0 / 1px var(--len) no-repeat;
+  }
+}
+
+/* a print pegged to the line swings a little and settles */
+@keyframes hang {
+  0% {
+    transform: rotate(-5deg);
+  }
+  45% {
+    transform: rotate(2.5deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The preloader covers the page from the first paint. It's gone at once when it has played this session,
+   and if its script never runs it fades out by itself. */
+@keyframes preloader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+[data-preloader] {
+  animation: preloader-failsafe 0.5s ease 7s forwards;
+}
+[data-intro="seen"] [data-preloader] {
+  display: none;
+}
+
+/* The hero's opening, first frame: the lines below their edges, the picture closed, the small print out.
+   The opening (hero.tsx) plays from here; if it never gets to, everything shows itself after a while. */
+@keyframes hero-failsafe {
+  to {
+    transform: none;
+    clip-path: inset(0);
+    opacity: 1;
+  }
+}
+.hero-pending [data-line] {
+  transform: translateY(112%);
+}
+.hero-pending [data-hero-photo] {
+  clip-path: inset(100% 0 0 0);
+}
+.hero-pending [data-hero-fade] {
+  opacity: 0;
+}
+.hero-pending [data-line],
+.hero-pending [data-hero-photo],
+.hero-pending [data-hero-fade] {
+  animation: hero-failsafe 0.6s ease 9s forwards;
 }
 
 /* Lenis */
@@ -71,155 +205,4 @@ html.lenis body {
 }
 .lenis.lenis-stopped {
   overflow: clip;
-}
-
-/* Film grain over the photograph, Aldena style: a fine tile, printed rather than animated */
-.grain {
-  background-image: url("/hero/grain.png");
-  background-size: 128px 128px;
-  opacity: 0.17;
-}
-
-/* Intro start states. Only with JS and motion allowed, so nobody gets stuck on a blank frame. The intro
-   is done well inside 6s; if a script error stops it from ever running, everything shows itself then. */
-@keyframes failsafe-show {
-  to {
-    opacity: 1;
-  }
-}
-@keyframes failsafe-ink {
-  to {
-    color: var(--cream);
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .js [data-intro="fade"] {
-    opacity: 0;
-    animation: failsafe-show 0.6s ease 6s forwards;
-  }
-}
-
-/* With JS the smoke canvas takes over. Without JS, or when WebGL fails, the photograph stands in. */
-.js [data-photo-fallback] {
-  opacity: 0;
-}
-.js section:not([data-webgl]) [data-photo-fallback] {
-  animation: failsafe-show 0.6s ease 6s forwards;
-}
-[data-webgl="off"] [data-photo-fallback] {
-  opacity: 1;
-}
-[data-webgl="on"] [data-smoke],
-[data-webgl="on"] [data-vines] {
-  opacity: 1;
-}
-
-/* The name is drawn on a canvas (his head cut out over it, light under the cursor). The real <h1> stays
-   for readers and search, and only shows itself if the canvas can't draw, or never got the chance. */
-.js [data-title-text],
-.js [data-title-text]:not([data-canvas="off"])::selection {
-  color: transparent;
-}
-.js [data-title-text][data-canvas="off"] {
-  color: var(--cream);
-}
-.js [data-title-text]:not([data-canvas]) {
-  animation: failsafe-ink 0s 6s forwards;
-}
-
-/* Aldena's link hover: letters roll up one after another, each one's copy (a text-shadow a line below)
-   rolling in behind it */
-.roll {
-  display: inline-flex;
-  height: 1.1em;
-  overflow: hidden;
-  line-height: 1.1em;
-  vertical-align: top;
-}
-.roll > span {
-  display: block;
-  white-space: pre;
-  text-shadow: 0 1.1em 0 currentColor;
-  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i) * 0.025s);
-}
-.roll-host:hover .roll > span,
-.roll-host:focus-visible .roll > span {
-  transform: translateY(-1.1em);
-}
-
-/* The dark glass the cards are made of: a deep red tint with a hairline edge, the photo behind blurred and
-   more saturated, and in Chromium also bent a little through the #liquid filter (flagged in the layout),
-   like looking through poured glass */
-@layer components {
-  .glass {
-    border: 1px solid color-mix(in oklab, var(--cream) 12%, transparent);
-    background: rgb(52 8 5 / 0.55);
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
-    backdrop-filter: blur(24px) saturate(150%);
-  }
-  .liquid .glass {
-    backdrop-filter: blur(8px) url(#liquid) saturate(150%);
-  }
-}
-
-/* The podcast preview's frame drifts slowly, like a clip on loop */
-@keyframes drift {
-  from {
-    transform: scale(1.02);
-  }
-  to {
-    transform: scale(1.12) translate(-2%, -1.5%);
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .drift {
-    animation: drift 9s ease-in-out infinite alternate;
-  }
-}
-
-/* The small menu grows up out of the burger, then its rows rise in, one after another */
-.menu-pop {
-  clip-path: inset(0 round 6px);
-  transition:
-    clip-path 0.55s var(--ease-out-expo),
-    transform 0.55s var(--ease-out-expo),
-    opacity 0.3s ease;
-}
-.menu-pop[data-starting-style],
-.menu-pop[data-ending-style] {
-  clip-path: inset(100% 0 0 0 round 6px);
-  transform: translateY(8px);
-  opacity: 0;
-}
-.menu-pop[data-ending-style] {
-  transition-duration: 0.3s;
-}
-.menu-item {
-  transition:
-    transform 0.6s var(--ease-out-expo) calc(0.06s + var(--i) * 0.04s),
-    opacity 0.4s ease calc(0.06s + var(--i) * 0.04s);
-}
-.menu-pop[data-starting-style] .menu-item {
-  transform: translateY(14px);
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .roll > span,
-  .menu-pop,
-  .menu-item {
-    transition: opacity 0.2s;
-  }
-  .roll-host:hover .roll > span,
-  .roll-host:focus-visible .roll > span {
-    transform: none;
-  }
-  .menu-pop[data-starting-style],
-  .menu-pop[data-ending-style] {
-    clip-path: inset(0 round 6px);
-    transform: none;
-  }
-  .menu-pop[data-starting-style] .menu-item {
-    transform: none;
-  }
 }
