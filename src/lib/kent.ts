@@ -99,7 +99,6 @@ export const CURRENT: Project[] = [
     what: "Ori Tsolikouri, a natural white made from two kinds of one grape. Bright, fresh, acidic, stark, crunchy, salty, intense. 2025 vintage, 222 bottles.",
     links: [
       { label: "About the wine", href: "/wine" },
-      { label: "wine.fyi", href: "https://wine.fyi" },
     ],
     photo: { src: "/kent/photos/wine.webp", alt: "A turquoise crate of white wine bottles with lilac caps, one labelled Fresh Acidyc White, Ori Tsolikouri" },
     page: "/wine",
@@ -111,7 +110,6 @@ export const CURRENT: Project[] = [
     what: "A recurring dinner series that seats 18 of Tbilisi’s most interesting people at one table. Each edition has a theme carried through the room, the menu and the wine.",
     links: [
       { label: "About the dinners", href: "/dinner" },
-      { label: "dinner.fyi", href: "https://dinner.fyi" },
     ],
     photo: { src: "/kent/photos/dinner-table.webp", alt: "A long table set in a courtyard under vines, guests along both sides, candles and wine down the middle", position: "50% 72%" },
     page: "/dinner",
@@ -192,7 +190,6 @@ export const GEORGIA = {
     { src: "/kent/photos/georgia-meadow.webp", alt: "A cow grazing on a rolling green meadow, a mast on the hilltop", position: "65% 50%" },
     { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" },
     { src: "/kent/photos/georgia-cows.webp", alt: "Three brown cows on a road by a mossy rock face", position: "70% 50%" },
-    { src: "/kent/photos/kent-booth.webp", alt: "Kent, arms crossed, in a red leather booth under old wooden windows", position: "50% 40%" },
     { src: "/kent/photos/georgia-bmw.webp", alt: "A red BMW with its door open in a mountain car park, a bouncy castle behind it", position: "35% 50%" },
     { src: "/kent/photos/dinner-table.webp", alt: "A long table set in a courtyard under vines, guests along both sides, candles and wine down the middle", position: "50% 72%" },
   ] satisfies Photo[],
@@ -331,7 +328,7 @@ export const WINE_PAGE: ProjectPageData = {
     "Ori Tsolikouri is a single grape blend: two kinds of Tsolikouri in one bottle. A third is Golden Tsolikouri from Imereti, two thirds Green Tsolikouri from Lechkhumi.",
     "Bright, fresh, acidic, stark, crunchy, salty, intense. Fresh, acidic and white, like the label says.",
   ],
-  links: [{ label: "wine.fyi", href: "https://wine.fyi" }],
+  links: [],
   sections: [
     {
       id: "the-wine",
@@ -373,6 +370,8 @@ export const WINE_PAGE: ProjectPageData = {
     { src: "/kent/photos/wine-table.webp", alt: "Hands pouring and reaching across a table crowded with bottles and glasses", position: "40% 50%" },
     { src: "/kent/photos/wine-laugh.webp", alt: "A woman in glasses laughing at a tasting, a man smiling behind her", position: "35% 50%" },
     { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" },
+    { src: "/kent/photos/wine-bar.webp", alt: "A wooden bar lined with open bottles and glasses, lit by flash at night" },
+    { src: "/kent/photos/wine-orange.webp", alt: "Glasses of amber wine and a bottle on a pale table" },
   ],
 };
 
@@ -384,7 +383,7 @@ export const DINNER_PAGE: ProjectPageData = {
     "DINNER.FYI is a recurring dinner series by kent.fyi that seats 18 of Tbilisi’s most interesting people at one table. Each edition has a theme carried through the room, the menu and the wine.",
     "No. 2 is a winter dinner at Poliphonia: an evening that travels from cold to warm.",
   ],
-  links: [{ label: "dinner.fyi", href: "https://dinner.fyi" }],
+  links: [],
   sections: [
     {
       id: "format",

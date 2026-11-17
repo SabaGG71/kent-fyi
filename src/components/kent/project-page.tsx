@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ProjectPageData } from "@/lib/kent";
 import { Out, SectionHead } from "./links";
-import { PhotoStrip } from "./photo-strip";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
@@ -37,13 +36,15 @@ export function ProjectPage({ page }: { page: ProjectPageData }) {
                 <p key={d}>{d}</p>
               ))}
             </div>
-            <p className="t-small mt-4 flex flex-wrap gap-x-5 gap-y-1">
-              {page.links.map((l) => (
-                <Out key={l.href} href={l.href}>
-                  {l.label}
-                </Out>
-              ))}
-            </p>
+            {page.links.length > 0 && (
+              <p className="t-small mt-4 flex flex-wrap gap-x-5 gap-y-1">
+                {page.links.map((l) => (
+                  <Out key={l.href} href={l.href}>
+                    {l.label}
+                  </Out>
+                ))}
+              </p>
+            )}
           </header>
 
           {lead && (
@@ -81,9 +82,18 @@ export function ProjectPage({ page }: { page: ProjectPageData }) {
         </div>
 
         {rest.length > 1 && (
+          // small, like the image archive on the home page: columns, each photograph at its own shape
           <section aria-labelledby="photos-title" className="mt-[clamp(56px,7vw,104px)]">
-            <SectionHead id="photos-title">Photographs</SectionHead>
-            <PhotoStrip scroll={rest.length > 3} photos={rest} label={`${page.name}, in photographs`} className="mt-6" />
+            <SectionHead id="photos-title" aside={`${rest.length} images`}>
+              Photographs
+            </SectionHead>
+            <ul aria-label={`${page.name}, in photographs`} className="mt-[clamp(24px,3vw,44px)] columns-2 gap-(--g) md:columns-3 xl:columns-4">
+              {rest.map((p) => (
+                <li key={p.src} className="mb-(--g) break-inside-avoid">
+                  <Image src={p.src} alt={p.alt} width={1200} height={1500} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />
+                </li>
+              ))}
+            </ul>
           </section>
         )}
       </main>
