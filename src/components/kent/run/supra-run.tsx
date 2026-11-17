@@ -674,7 +674,7 @@ export function SupraRun() {
             ["ArrowRight", "→", "Faster"],
           ] as const
         ).map(([key, glyph, label]) => (
-          <button key={key} type="button" aria-label={label} {...hold(key)} className="mono h-12 touch-none border border-ink/15 text-[18px] text-ink/70 active:bg-ink active:text-paper">
+          <button key={key} type="button" aria-label={label} {...hold(key)} className="mono h-12 touch-none border border-fg/25 text-[18px] text-fg/80 active:bg-fg active:text-bg">
             {glyph}
           </button>
         ))}

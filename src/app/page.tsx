@@ -1,24 +1,25 @@
-import { Footnotes } from "@/components/kent/footnotes";
-import { GameSection } from "@/components/kent/game-section";
-import { Hero } from "@/components/kent/hero";
-import { Play } from "@/components/kent/play";
+import { About, Archive, Contact, Earlier, Georgia, Modeling, Press, Work } from "@/components/kent/home";
 import { SiteFooter } from "@/components/kent/site-footer";
 import { SiteHeader } from "@/components/kent/site-header";
 
 /**
- * kent.fyi: for your information. A list of things worth knowing about Kent, each printed live through
- * his own marble, then the footnotes that back each one up, his portrait set in all of it, a game, then how
- * to reach him.
+ * kent.fyi: Kent, briefly, then what he's working on now (WINE.FYI, DINNER.FYI, KENT.FYI, LocalEyes),
+ * Georgia in photographs, what came before (VOILA, Swift), modeling and acting, about, features and
+ * podcasts, the image archive, and how to reach him. Black throughout; the colour is in the photographs.
  */
 export default function Home() {
   return (
     <>
       <SiteHeader />
       <main id="main">
-        <Hero />
-        <Footnotes />
-        <Play />
-        <GameSection />
+        <Work />
+        <Georgia />
+        <Earlier />
+        <Modeling />
+        <About />
+        <Press />
+        <Archive />
+        <Contact />
       </main>
       <SiteFooter />
     </>

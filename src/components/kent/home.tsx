@@ -1,0 +1,214 @@
+import Image from "next/image";
+import { ABOUT, ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, PODCASTS } from "@/lib/kent";
+import { Out, SectionHead } from "./links";
+import { PhotoStrip } from "./photo-strip";
+import { ProjectIndex } from "./project-index";
+
+const section = "scroll-mt-4 px-(--m) pb-[clamp(72px,9vw,140px)]";
+
+/** Kent, briefly, then what he's working on now: the index, a photograph on the right for each */
+export function Work() {
+  return (
+    <section id="work" aria-labelledby="work-title" className="scroll-mt-4 px-(--m) pt-[clamp(40px,8svh,96px)] pb-[clamp(72px,9vw,140px)]">
+      <ProjectIndex projects={CURRENT} fallback={INTRO_PHOTO}>
+        <p className="t-display max-w-[17ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance">{INTRO}</p>
+        <div className="mt-[clamp(48px,7vw,104px)]">
+          <SectionHead id="work-title">Current selection</SectionHead>
+        </div>
+      </ProjectIndex>
+    </section>
+  );
+}
+
+/** VOILA and Swift: what came before */
+export function Earlier() {
+  return (
+    <section id="earlier" aria-labelledby="earlier-title" className={section}>
+      <ProjectIndex projects={EARLIER} fallback={EARLIER[0].photo} compact>
+        <SectionHead id="earlier-title">Earlier projects</SectionHead>
+      </ProjectIndex>
+    </section>
+  );
+}
+
+/** KENT.FYI's subject: Georgia, in photographs from his Instagram */
+export function Georgia() {
+  return (
+    <section id="georgia" aria-labelledby="georgia-title" className={section}>
+      <SectionHead id="georgia-label" aside="KENT.FYI">
+        Content
+      </SectionHead>
+      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-6 lg:grid-cols-12">
+        <div className="lg:col-span-7">
+          <h3 id="georgia-title" className="t-display">
+            GEORGIA
+          </h3>
+          <p className="t-lead mt-3 text-fg">{GEORGIA.line}</p>
+        </div>
+        <div className="lg:col-span-4 lg:col-start-9 lg:pt-2">
+          <p className="t-lead text-fg/85">{GEORGIA.body}</p>
+          <p className="t-small mt-3 flex flex-wrap gap-x-5 gap-y-1">
+            {GEORGIA.links.map((l) => (
+              <Out key={l.label} href={l.href}>
+                {l.label}
+              </Out>
+            ))}
+          </p>
+        </div>
+      </div>
+      <PhotoStrip photos={GEORGIA.photos} label="Georgia, in photographs" className="mt-[clamp(28px,3.4vw,52px)]" />
+    </section>
+  );
+}
+
+/** modeling and acting: the main photograph, the card, the numbers, the work */
+export function Modeling() {
+  return (
+    <section id="modeling" aria-labelledby="modeling-title" className={section}>
+      <SectionHead id="modeling-title">Modeling and acting</SectionHead>
+      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-10 lg:grid-cols-12">
+        <div className="relative aspect-[4/5] overflow-hidden lg:col-span-5">
+          <Image src={MODELING.photo.src} alt={MODELING.photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" style={{ objectPosition: MODELING.photo.position }} />
+        </div>
+        <div className="flex flex-col gap-10 lg:col-span-6 lg:col-start-7">
+          <dl className="grid grid-cols-[8.5em_1fr] gap-y-2">
+            {MODELING.card.map((c) => (
+              <div key={c.label} className="contents">
+                <dt className="t-label pt-[3px] text-fg/60">{c.label}</dt>
+                <dd className="t-lead">{c.href ? <Out href={c.href}>{c.value}</Out> : c.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div>
+            <ul className="flex flex-wrap gap-x-[clamp(24px,3vw,48px)] gap-y-4">
+              {MODELING.numbers.map((n) => (
+                <li key={n.label}>
+                  <p className="text-[clamp(34px,3.4vw,52px)] leading-none tracking-[-0.03em]">{n.figure}</p>
+                  <p className="t-small mt-1 text-fg/65">{n.label}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="t-small mt-3 text-fg/55">{MODELING.numbersNote}</p>
+          </div>
+          <div>
+            <p className="t-label text-fg/60">Work</p>
+            <ul className="mt-3">
+              {MODELING.work.map((w) => (
+                <li key={w.name} className="grid grid-cols-1 gap-x-4 gap-y-1 border-t border-fg/20 py-3 sm:grid-cols-[1.2fr_1fr_auto]">
+                  <span className="t-lead">{w.name}</span>
+                  <span className="t-small self-center text-fg/65">{w.role}</span>
+                  <span className="t-small flex gap-4 self-center">
+                    {w.links.length ? (
+                      w.links.map((l) => (
+                        <Out key={l.href} href={l.href}>
+                          {l.label}
+                        </Out>
+                      ))
+                    ) : (
+                      <span className="text-fg/55">{"note" in w ? w.note : ""}</span>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ul className="grid grid-cols-2 gap-(--g)">
+            {MODELING.photos.map((p) => (
+              <li key={p.src} className="relative aspect-[4/5] overflow-hidden">
+                <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 24vw, 50vw" className="object-cover" style={{ objectPosition: p.position }} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Kent, in one sentence */
+export function About() {
+  return (
+    <section id="about" aria-labelledby="about-title" className={section}>
+      <SectionHead id="about-title">About Kent</SectionHead>
+      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) lg:grid-cols-12">
+        <p className="text-[clamp(22px,2.1vw,32px)] leading-[1.25] tracking-[-0.015em] text-balance lg:col-span-8">{ABOUT}</p>
+      </div>
+    </section>
+  );
+}
+
+/** where he's been written up and talked: text links only */
+export function Press() {
+  return (
+    <section id="press" aria-labelledby="press-title" className={section}>
+      <SectionHead id="press-title">Features and podcasts</SectionHead>
+      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-10 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <p className="t-label text-fg/60">Features</p>
+          <ul className="t-lead mt-3 space-y-1.5">
+            {FEATURES.map((f) => (
+              <li key={f.label}>{f.href ? <Out href={f.href}>{f.label}</Out> : <span>{f.label}</span>}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="lg:col-span-7 lg:col-start-6">
+          <p className="t-label text-fg/60">Podcasts</p>
+          <ul className="mt-3 space-y-3">
+            {PODCASTS.map((p) => (
+              <li key={p.id} className="t-lead">
+                <span className="text-fg/60">{p.show}. </span>
+                <Out href={`https://www.youtube.com/watch?v=${p.id}`}>{p.title}</Out>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** the image archive: what he notices, an issue at a time, no captions */
+export function Archive() {
+  return (
+    <section id="archive" aria-labelledby="archive-title" className={section}>
+      <SectionHead id="archive-title" aside={`${ARCHIVE.photos.length} images`}>
+        Image archive, issue {ARCHIVE.issue}
+      </SectionHead>
+      <p className="t-lead mt-[clamp(22px,2.6vw,36px)] text-fg/85">{ARCHIVE.line}</p>
+      <ul className="mt-[clamp(24px,3vw,44px)] columns-2 gap-(--g) md:columns-3 xl:columns-4">
+        {ARCHIVE.photos.map((p) => (
+          <li key={p.src} className="mb-(--g) break-inside-avoid">
+            <Image src={p.src} alt={p.alt} width={1200} height={1500} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** how to reach him: management first, his own address smaller */
+export function Contact() {
+  return (
+    <section id="contact" aria-labelledby="contact-title" className={section}>
+      <SectionHead id="contact-title">Contact</SectionHead>
+      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-8 lg:grid-cols-12">
+        <div className="lg:col-span-8">
+          <p className="t-lead text-fg/85">{CONTACT.line}</p>
+          <p className="t-label mt-6 text-fg/60">Management</p>
+          <a href={`mailto:${MANAGER}`} className="mt-2 inline-block text-[clamp(30px,3.6vw,56px)] leading-none tracking-[-0.03em] underline decoration-2 underline-offset-[0.14em] transition-colors hover:text-accent">
+            {MANAGER}
+          </a>
+        </div>
+        <div className="t-small space-y-1 lg:col-span-3 lg:col-start-10 lg:pt-1">
+          <p className="t-label text-fg/60">Kent</p>
+          <p>
+            <Out href={`mailto:${EMAIL}`}>{EMAIL}</Out>
+          </p>
+          <p>
+            <Out href={INSTAGRAM}>@kent.fyi on Instagram</Out>
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
