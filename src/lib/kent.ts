@@ -55,7 +55,7 @@ export const CURRENT: Project[] = [
       { label: "About the dinners", href: "/dinner" },
       { label: "dinner.fyi", href: "https://dinner.fyi" },
     ],
-    photo: { src: "/kent/photos/dinner.webp", alt: "A painting of Galileo showing his telescope to the Doge of Venice and his court, by moonlight" },
+    photo: { src: "/kent/photos/dinner-table.webp", alt: "A long table set in a courtyard under vines, guests along both sides, candles and wine down the middle", position: "50% 72%" },
     page: "/dinner",
   },
   {
@@ -78,7 +78,7 @@ export const CURRENT: Project[] = [
       { label: "localeyesgrowth.com", href: "https://localeyesgrowth.com" },
       { label: "The LocalEyes Podcast", href: "https://www.youtube.com/watch?v=WtfVjOL8TiU" },
     ],
-    photo: { src: "/kent/photos/localeyes-podcast.webp", alt: "Kent at the microphone on the LocalEyes Podcast" },
+    photo: { src: "/kent/photos/localeyes-walk.webp", alt: "Kent in a red shirt walking past a colonnade with another man", position: "50% 40%" },
   },
 ];
 
@@ -299,7 +299,7 @@ export const DINNER_PAGE: ProjectPageData = {
       ],
     },
   ],
-  photos: [dinner.photo],
+  photos: [dinner.photo, { src: "/kent/photos/dinner.webp", alt: "A painting of Galileo showing his telescope to the Doge of Venice and his court, by moonlight" }],
 };
 
 /** the site's share card, for pages that set their own share title */
