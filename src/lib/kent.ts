@@ -10,13 +10,14 @@
 export const EMAIL = "its@kent.fyi";
 export const MANAGER = "nini@kent.fyi";
 export const INSTAGRAM = "https://www.instagram.com/kent.fyi/";
+export const VOILA_INSTAGRAM = "https://www.instagram.com/voila.coffee/";
 
 export type Link = { label: string; href: string };
 export type Photo = { src: string; alt: string; position?: string };
 
 export const INTRO = "I’m Kent. I’m currently based in Tbilisi, Georgia, working on various projects.";
 /** beside the introduction, until a project is pointed at */
-export const INTRO_PHOTO: Photo = { src: "/kent/photos/kent-sky.webp", alt: "Kent in low evening sun against a deep blue sky", position: "56% 50%" };
+export const INTRO_PHOTO: Photo = { src: "/kent/photos/kent-sky-crop.webp", alt: "Kent in low evening sun against a deep blue sky" };
 
 export type Project = {
   id: string;
@@ -124,7 +125,7 @@ export const CURRENT: Project[] = [
       { label: "@kent.fyi on Instagram", href: INSTAGRAM },
       { label: "Georgia, below", href: "#georgia" },
     ],
-    photo: { src: "/kent/photos/kent-street.webp", alt: "A man in a dark jacket on an old street in Georgia, by a shop sign that reads Vintage Crush", position: "55% 50%" },
+    photo: { src: "/kent/photos/kent-booth.webp", alt: "Kent, arms crossed, in a red leather booth under old wooden windows", position: "50% 40%" },
   },
   {
     id: "localeyes",
@@ -145,8 +146,12 @@ export const EARLIER: Project[] = [
     id: "voila",
     name: "VOILA",
     kind: "Specialty instant coffee",
-    what: "Coffee Review scored it 90 points, the highest an instant coffee has scored. We learned ecommerce the hard way: conversion rates, brand, and earning trust before anyone tastes a cup.",
-    links: [{ label: "The 90-point review", href: "https://www.coffeereview.com/review/cirque-tarrazu-f1-natural/" }],
+    // Kent's words, from the voila.coffee About page he wrote
+    what: "Specialty instant coffee. Every cup meticulously crafted from the best specialty coffees in the world to precise extractions, upholding quality from farm to cup. If you have water, you can have amazing coffee in seconds.",
+    links: [
+      { label: "@voila.coffee on Instagram", href: VOILA_INSTAGRAM },
+      { label: "The 90-point review", href: "https://www.coffeereview.com/review/cirque-tarrazu-f1-natural/" },
+    ],
     press: [
       { label: "Chicago Tribune", href: "https://www.chicagotribune.com/2018/09/10/specialty-instant-coffee-startups-aim-to-change-the-way-you-drink-a-cup-of-joe/" },
       { label: "Forbes", href: "https://www.forbes.com/sites/lmowery/2020/12/31/six-instant-coffees-to-seek-out/" },
@@ -163,7 +168,7 @@ export const EARLIER: Project[] = [
     kind: "Demolition company",
     what: "Commercial and residential demolition in Bend, Oregon: quick, dust-free, and cleaned up before we leave, so the next trade can get straight to work.",
     links: [{ label: "swift-demo.com", href: "https://www.swift-demo.com/" }],
-    photo: { src: "/kent/photos/swift-reach.webp", alt: "A man in a cap reaching up to a door frame on a Swift job" },
+    photo: { src: "/kent/photos/swift-bucket.webp", alt: "A Swift crew member in a hard hat carrying a yellow bucket past orange and blue ladders" },
   },
 ];
 
