@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { ABOUT, ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, PODCASTS } from "@/lib/kent";
+import { ABOUT, ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, YOUTUBE } from "@/lib/kent";
 import { Out, SectionHead } from "./links";
 import { PhotoStrip } from "./photo-strip";
 import { ProjectIndex } from "./project-index";
+import { Video } from "./videos";
+import { WouldLike } from "./would-like";
 
 const section = "scroll-mt-4 px-(--m) pb-[clamp(72px,9vw,140px)]";
 
@@ -12,6 +14,9 @@ export function Work() {
     <section id="work" aria-labelledby="work-title" className="scroll-mt-4 px-(--m) pt-[clamp(40px,8svh,96px)] pb-[clamp(72px,9vw,140px)]">
       <ProjectIndex projects={CURRENT} fallback={INTRO_PHOTO}>
         <p className="t-display max-w-[17ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance">{INTRO}</p>
+        <div id="next" className="scroll-mt-6">
+          <WouldLike />
+        </div>
         <div className="mt-[clamp(48px,7vw,104px)]">
           <SectionHead id="work-title">Current selection</SectionHead>
         </div>
@@ -56,7 +61,25 @@ export function Georgia() {
           </p>
         </div>
       </div>
-      <PhotoStrip photos={GEORGIA.photos} label="Georgia, in photographs" className="mt-[clamp(28px,3.4vw,52px)]" />
+      <PhotoStrip scroll photos={GEORGIA.photos} label="Georgia, in photographs" className="mt-[clamp(28px,3.4vw,52px)]" />
+    </section>
+  );
+}
+
+/** KENT.FYI on YouTube: three videos and the channel */
+export function YouTube() {
+  return (
+    <section id="youtube" aria-labelledby="youtube-title" className={section}>
+      <SectionHead id="youtube-title" aside={<Out href={YOUTUBE.channel}>{YOUTUBE.handle}</Out>}>
+        On YouTube
+      </SectionHead>
+      <ul className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-8 md:grid-cols-3">
+        {YOUTUBE.videos.map((v) => (
+          <li key={v.id}>
+            <Video id={v.id} title={v.title} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
@@ -137,32 +160,22 @@ export function About() {
   );
 }
 
-/** where he's been written up and talked: text links only */
+/** a few conversations, small and quiet: year, show, title */
 export function Press() {
   return (
     <section id="press" aria-labelledby="press-title" className={section}>
-      <SectionHead id="press-title">Features and podcasts</SectionHead>
-      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-10 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <p className="t-label text-fg/60">Features</p>
-          <ul className="t-lead mt-3 space-y-1.5">
-            {FEATURES.map((f) => (
-              <li key={f.label}>{f.href ? <Out href={f.href}>{f.label}</Out> : <span>{f.label}</span>}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="lg:col-span-7 lg:col-start-6">
-          <p className="t-label text-fg/60">Podcasts</p>
-          <ul className="mt-3 space-y-3">
-            {PODCASTS.map((p) => (
-              <li key={p.id} className="t-lead">
-                <span className="text-fg/60">{p.show}. </span>
-                <Out href={`https://www.youtube.com/watch?v=${p.id}`}>{p.title}</Out>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <SectionHead id="press-title">Features</SectionHead>
+      <ul className="t-small mt-3 lg:w-2/3">
+        {FEATURES.map((f) => (
+          <li key={f.id} className="grid grid-cols-[3.5em_1fr] gap-x-3 border-b border-fg/10 py-2 last:border-b-0 sm:grid-cols-[3.5em_14em_1fr]">
+            <span className="text-fg/50 tabular-nums">{f.year}</span>
+            <span className="text-fg/60">{f.show}</span>
+            <span className="col-start-2 sm:col-start-auto">
+              <Out href={`https://www.youtube.com/watch?v=${f.id}`}>{f.title}</Out>
+            </span>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
@@ -195,7 +208,7 @@ export function Contact() {
         <div className="lg:col-span-8">
           <p className="t-lead text-fg/85">{CONTACT.line}</p>
           <p className="t-label mt-6 text-fg/60">Management</p>
-          <a href={`mailto:${MANAGER}`} className="mt-2 inline-block text-[clamp(30px,3.6vw,56px)] leading-none tracking-[-0.03em] underline decoration-2 underline-offset-[0.14em] transition-colors hover:text-accent">
+          <a href={`mailto:${MANAGER}`} className="mt-2 inline-block text-[clamp(30px,3.6vw,56px)] leading-none tracking-[-0.03em] underline decoration-2 underline-offset-[0.14em] hover:text-hover">
             {MANAGER}
           </a>
         </div>

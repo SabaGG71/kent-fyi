@@ -30,7 +30,64 @@ export type Project = {
   photo: Photo;
   /** its own page on this site, if it has one */
   page?: string;
+  /** where it was written up */
+  press?: Link[];
 };
+
+/**
+ * What Kent would like to work on next, after Playlab's "We would like to". Each has its own page: what the idea
+ * is, then the references, one under the other with a short caption, then how to make it happen. References
+ * are Kent's to add; until he does, a page is just the idea.
+ */
+export type Reference = Photo & { caption?: string };
+export type Idea = {
+  slug: string;
+  /** finishes the sentence "I would like to…" */
+  title: string;
+  /** one line, shown when the row opens */
+  short: string;
+  /** the idea, a paragraph each */
+  body: string[];
+  references: Reference[];
+};
+
+export const NEXT: Idea[] = [
+  {
+    slug: "jewelry",
+    title: "Make jewelry with a Georgian designer",
+    short: "A collection made with a super creative jewelry designer, ideally here in Georgia.",
+    body: ["I’d like to make a jewelry project with a super creative jewelry designer, ideally one working in Georgia."],
+    references: [],
+  },
+  {
+    slug: "fragrance",
+    title: "Make a fragrance",
+    short: "A scent of my own, made with a perfumer.",
+    body: ["I’d like to make a fragrance."],
+    references: [],
+  },
+  {
+    slug: "interiors",
+    title: "Design an object for the home",
+    short: "One interiors object, made well.",
+    body: ["I’d like to make an interiors object."],
+    references: [],
+  },
+  {
+    slug: "real-estate",
+    title: "Take on a real estate project",
+    short: "A building or a space, start to finish.",
+    body: ["I’d like to do a real estate project."],
+    references: [],
+  },
+  {
+    slug: "cafe",
+    title: "Open a café or coffee concept",
+    short: "Back to where I started: coffee, this time with a room around it.",
+    body: ["I started with a coffee cart in 2014 and went on to make VOILA. I’d like to come back to coffee with a café or a coffee concept."],
+    references: [],
+  },
+];
 
 /** the current selection, in Kent's order */
 export const CURRENT: Project[] = [
@@ -50,7 +107,7 @@ export const CURRENT: Project[] = [
     id: "dinner",
     name: "DINNER.FYI",
     kind: "Dinner series",
-    what: "In 18th century Birmingham, the Lunar Society met for dinner once a month: builders, inventors and tinkerers at one table, on the night nearest the full moon, so they could ride home by its light.",
+    what: "A recurring dinner series that seats 18 of Tbilisi’s most interesting people at one table. Each edition has a theme carried through the room, the menu and the wine.",
     links: [
       { label: "About the dinners", href: "/dinner" },
       { label: "dinner.fyi", href: "https://dinner.fyi" },
@@ -90,6 +147,14 @@ export const EARLIER: Project[] = [
     kind: "Specialty instant coffee",
     what: "Coffee Review scored it 90 points, the highest an instant coffee has scored. We learned ecommerce the hard way: conversion rates, brand, and earning trust before anyone tastes a cup.",
     links: [{ label: "The 90-point review", href: "https://www.coffeereview.com/review/cirque-tarrazu-f1-natural/" }],
+    press: [
+      { label: "Chicago Tribune", href: "https://www.chicagotribune.com/2018/09/10/specialty-instant-coffee-startups-aim-to-change-the-way-you-drink-a-cup-of-joe/" },
+      { label: "Forbes", href: "https://www.forbes.com/sites/lmowery/2020/12/31/six-instant-coffees-to-seek-out/" },
+      { label: "The Wall Street Journal", href: "https://web.archive.org/web/20210410233709/https://graphics.wsj.com/image-grid/off-duty-coffee/" },
+      { label: "Food & Wine", href: "https://www.foodandwine.com/coffee/instant-coffee-taste-test" },
+      { label: "Good Housekeeping", href: "https://www.goodhousekeeping.com/what-to-buy/kitchen-products/g32403995/best-instant-coffee/" },
+      { label: "NPR’s How I Built This", href: "" },
+    ],
     photo: { src: "/kent/photos/voila-glass.webp", alt: "A VOILA Labs box wrapped in black and white marble, lying on blue glass" },
   },
   {
@@ -116,7 +181,21 @@ export const GEORGIA = {
     { src: "/kent/photos/kent-street.webp", alt: "A man in a dark jacket on an old street in Georgia, by a shop sign that reads Vintage Crush", position: "55% 50%" },
     { src: "/kent/photos/kent-red.webp", alt: "Kent and a friend with glasses of red wine, in red light", position: "40% 50%" },
     { src: "/kent/photos/kent-balcony.webp", alt: "Two men at a railing, looking out into fog" },
+    { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" },
+    { src: "/kent/photos/kent-booth.webp", alt: "Kent, arms crossed, in a red leather booth under old wooden windows", position: "50% 40%" },
+    { src: "/kent/photos/dinner-table.webp", alt: "A long table set in a courtyard under vines, guests along both sides, candles and wine down the middle", position: "50% 72%" },
   ] satisfies Photo[],
+};
+
+/** KENT.FYI on YouTube: the channel, and three videos */
+export const YOUTUBE = {
+  channel: "https://www.youtube.com/@kentfyi",
+  handle: "@kentfyi",
+  videos: [
+    { id: "s7SWJymYjB0", title: "This Is Where Wine Was Born (I Made It Here)" },
+    { id: "RqTxR8iGoVQ", title: "Cost of Living in Tbilisi, Georgia: Budget to Luxury Living" },
+    { id: "TDlQuTra2WI", title: "I Changed Specialty Coffee… but Still Lost It All" },
+  ],
 };
 
 export const MODELING = {
@@ -131,11 +210,11 @@ export const MODELING = {
     { label: "Instagram", value: "@kent.fyi", href: INSTAGRAM },
   ],
   numbers: [
-    { figure: "12.4K", label: "followers" },
+    { figure: "16.5K", label: "followers" },
     { figure: "2.8M", label: "total views" },
     { figure: "410K", label: "top reel" },
   ],
-  numbersNote: "Instagram, as of August.",
+  numbersNote: "Instagram, as of November.",
   work: [
     {
       name: "Borjomi",
@@ -165,28 +244,15 @@ export const MODELING = {
 
 export const ABOUT = "Kent is a multi-hyphenate creative and entrepreneur that follows his curiosities to tell compelling stories through products, content, and experiences.";
 
-/** features: where VOILA was written up */
-export const FEATURES: Link[] = [
-  { label: "The Wall Street Journal", href: "https://web.archive.org/web/20210410233709/https://graphics.wsj.com/image-grid/off-duty-coffee/" },
-  { label: "Forbes", href: "https://www.forbes.com/sites/lmowery/2020/12/31/six-instant-coffees-to-seek-out/" },
-  { label: "Food & Wine", href: "https://www.foodandwine.com/coffee/instant-coffee-taste-test" },
-  { label: "NPR’s How I Built This", href: "" },
-  { label: "Chicago Tribune", href: "https://www.chicagotribune.com/2018/09/10/specialty-instant-coffee-startups-aim-to-change-the-way-you-drink-a-cup-of-joe/" },
-  { label: "Good Housekeeping", href: "https://www.goodhousekeeping.com/what-to-buy/kitchen-products/g32403995/best-instant-coffee/" },
-  { label: "Coffee Review, 90 points", href: "https://www.coffeereview.com/review/cirque-tarrazu-f1-natural/" },
-];
-
-export const PODCASTS = [
-  { show: "Imedi L", title: "Visitor: Kent Sheridan", id: "-5ziV7NblKw" },
-  { show: "Imported Opinions", title: "From Georgia to Georgia: why this American moved his family to Tbilisi", id: "VlE71KWUACk" },
-  { show: "ტვინის გასაღები", title: "Episode 11, with Kent Sheridan", id: "0ttH09QwcCg" },
-  { show: "OWNR OPS", title: "This ex coffee entrepreneur started a 7 figure demolition business", id: "Np93LmxEh98" },
-  { show: "Coffee Sometimes, Valor Coffee", title: "Kent Sheridan, the titan of specialty instant coffee", id: "ODMo_lVLnTk" },
-  { show: "Keys to the Shop", title: "Instant specialty coffee, with VOILA founder Kent Sheridan", id: "g4SObFBLcMk" },
-  { show: "The LocalEyes Podcast", title: "What 3 years of catering SEO taught us", id: "WtfVjOL8TiU" },
-  { show: "Mobile Business School", title: "The SEO secrets that put mobile carts on page one", id: "fDq7nGVi3rQ" },
-  { show: "Mobile Business School", title: "Stop using Instagram: why Google is better for your catering business", id: "-z_AungLovM" },
-  { show: "Valor Coffee", title: "SEO for coffee companies: website changes you need to make today", id: "LY-r2F0tBc8" },
+/**
+ * Features: the conversations worth hearing, newest first, kept short. The VOILA write-ups live under VOILA.
+ */
+export const FEATURES = [
+  { show: "ტვინის გასაღები", title: "Episode 11, with Kent Sheridan", id: "0ttH09QwcCg", year: 2026 },
+  { show: "Imported Opinions", title: "From Georgia to Georgia: why this American moved his family to Tbilisi", id: "VlE71KWUACk", year: 2025 },
+  { show: "OWNR OPS", title: "This ex coffee entrepreneur started a 7 figure demolition business", id: "Np93LmxEh98", year: 2025 },
+  { show: "Coffee Sometimes, Valor Coffee", title: "Kent Sheridan, the titan of specialty instant coffee", id: "ODMo_lVLnTk", year: 2022 },
+  { show: "Keys to the Shop", title: "Instant specialty coffee, with VOILA founder Kent Sheridan", id: "g4SObFBLcMk", year: 2018 },
 ] as const;
 
 /**
@@ -253,8 +319,17 @@ export const WINE_PAGE: ProjectPageData = {
         { label: "Grape", value: "Tsolikouri" },
       ],
     },
-    { id: "the-grape", title: "The grape", body: null },
+    {
+      id: "the-grape",
+      title: "The grape",
+      body: "Tsolikouri is a white grape from western Georgia, grown mostly in Imereti. It holds on to its acidity, which is what keeps this wine fresh.",
+    },
     { id: "where-to-buy", title: "Where to buy", body: null },
+    {
+      id: "the-making",
+      title: "The making",
+      details: [{ label: "Watch", value: "This Is Where Wine Was Born (I Made It Here)", href: "https://www.youtube.com/watch?v=s7SWJymYjB0" }],
+    },
   ],
   photos: [wine.photo, { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" }],
 };
@@ -264,8 +339,8 @@ export const DINNER_PAGE: ProjectPageData = {
   name: dinner.name,
   kind: dinner.kind,
   description: [
-    dinner.what,
-    "We’re restarting it: a monthly dinner for builders and experimenters early in their journeys. Ten to fifteen people, highly curated, and one remarkable guest. People around the table have been working on reversing brain ageing, building rocket ships and discovering new materials with AI.",
+    "DINNER.FYI is a recurring dinner series by kent.fyi that seats 18 of Tbilisi’s most interesting people at one table. Each edition has a theme carried through the room, the menu and the wine.",
+    "No. 2 is a winter dinner at Poliphonia: an evening that travels from cold to warm.",
   ],
   links: [{ label: "dinner.fyi", href: "https://dinner.fyi" }],
   sections: [
@@ -273,9 +348,20 @@ export const DINNER_PAGE: ProjectPageData = {
       id: "format",
       title: "The format",
       details: [
-        { label: "Invitation", value: "Invite only" },
-        { label: "How often", value: "Monthly" },
-        { label: "At the table", value: "Ten to fifteen people, and one remarkable guest" },
+        { label: "City", value: "Tbilisi" },
+        { label: "At the table", value: "18 people, one table" },
+        { label: "Each edition", value: "A theme carried through the room, the menu and the wine" },
+      ],
+    },
+    {
+      id: "no-2",
+      title: "No. 2",
+      aside: "Upcoming",
+      details: [
+        { label: "Season", value: "Winter" },
+        { label: "Place", value: "Poliphonia" },
+        { label: "Theme", value: "From cold to warm" },
+        { label: "Date", value: null },
       ],
     },
     {
@@ -285,17 +371,7 @@ export const DINNER_PAGE: ProjectPageData = {
       details: [
         { label: "Date", value: null },
         { label: "Place", value: null },
-        { label: "Guest", value: null },
-      ],
-    },
-    {
-      id: "no-2",
-      title: "No. 2",
-      aside: "Upcoming",
-      details: [
-        { label: "Date", value: "The next full moon" },
-        { label: "Place", value: null },
-        { label: "Guest", value: null },
+        { label: "Theme", value: null },
       ],
     },
   ],

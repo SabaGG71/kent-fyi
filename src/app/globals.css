@@ -9,6 +9,8 @@
   --color-bg: #000000;
   --color-fg: #ffffff;
   --color-accent: #d7e0eb;
+  /* hyperlink blue: every link turns it the instant you point at it, no fade */
+  --color-hover: #4d6dff;
   /* the game at /run keeps its own light palette */
   --color-paper: #ebeae7;
   --color-ink: #0b0e10;

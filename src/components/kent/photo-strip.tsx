@@ -14,7 +14,7 @@ const DWELL = 4500;
  * (the one in front fills yellow while it waits), and it moves on by itself every few seconds while it's
  * on screen. A finger on it holds it. Reduced motion: no autoplay.
  */
-export function PhotoStrip({ photos, label, className }: { photos: Photo[]; label: string; className?: string }) {
+export function PhotoStrip({ photos, label, className, scroll = false }: { photos: Photo[]; label: string; className?: string; scroll?: boolean }) {
   const track = useRef<HTMLUListElement>(null);
   const steering = useRef<number | null>(null);
   const [active, setActive] = useState(0);
@@ -105,17 +105,27 @@ export function PhotoStrip({ photos, label, className }: { photos: Photo[]; labe
         onTouchEnd={() => setHeld(false)}
         onTouchCancel={() => setHeld(false)}
         style={{ "--n": Math.max(photos.length, 2) } as React.CSSProperties}
-        className="relative -mx-(--m) flex snap-x snap-mandatory scroll-px-(--m) gap-(--g) overflow-x-auto overscroll-x-contain px-(--m) [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-[repeat(var(--n),minmax(0,1fr))] sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden"
+        className={cn(
+          "relative -mx-(--m) flex snap-x snap-mandatory scroll-px-(--m) gap-(--g) overflow-x-auto overscroll-x-contain px-(--m) [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          !scroll && "sm:mx-0 sm:grid sm:grid-cols-[repeat(var(--n),minmax(0,1fr))] sm:overflow-visible sm:px-0",
+        )}
       >
         {photos.map((p) => (
-          <li key={p.src} className={cn("relative aspect-[4/5] shrink-0 snap-start overflow-hidden sm:w-auto", photos.length > 1 ? "w-[78vw]" : "w-full")}>
-            <Image src={p.src} alt={p.alt} fill sizes="(min-width: 640px) 33vw, 78vw" className="object-cover" style={{ objectPosition: p.position }} />
+          <li
+            key={p.src}
+            className={cn(
+              "relative aspect-[4/5] shrink-0 snap-start overflow-hidden",
+              scroll ? "w-[78vw] sm:w-[clamp(280px,30vw,480px)]" : "sm:w-auto",
+              !scroll && (photos.length > 1 ? "w-[78vw]" : "w-full"),
+            )}
+          >
+            <Image src={p.src} alt={p.alt} fill quality={90} sizes={scroll ? "(min-width: 640px) 30vw, 78vw" : "(min-width: 640px) 33vw, 78vw"} className="object-cover" style={{ objectPosition: p.position }} />
           </li>
         ))}
       </ul>
 
       {photos.length > 1 && (
-        <div className="mt-3 flex items-center justify-between sm:hidden">
+        <div className={cn("mt-3 flex items-center justify-between", !scroll && "sm:hidden")}>
           <div className="-ml-1 flex">
             {photos.map((p, i) => (
               <button key={p.src} type="button" onClick={() => go(i)} aria-label={`Photo ${i + 1} of ${photos.length}`} aria-current={i === active || undefined} className="group px-1 py-3">
@@ -127,9 +137,21 @@ export function PhotoStrip({ photos, label, className }: { photos: Photo[]; labe
               </button>
             ))}
           </div>
-          <p className="t-label text-fg/65" aria-hidden>
-            {String(active + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="t-label text-fg/65" aria-hidden>
+              {String(active + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
+            </p>
+            {scroll && (
+              <span className="t-label hidden gap-3 sm:flex">
+                <button type="button" onClick={() => go(Math.max(active - 1, 0))} disabled={active === 0} className="hover:text-hover disabled:text-fg/25" aria-label="Previous photo">
+                  &larr;
+                </button>
+                <button type="button" onClick={() => go(Math.min(active + 1, photos.length - 1))} disabled={active === photos.length - 1} className="hover:text-hover disabled:text-fg/25" aria-label="Next photo">
+                  &rarr;
+                </button>
+              </span>
+            )}
+          </div>
         </div>
       )}
     </div>

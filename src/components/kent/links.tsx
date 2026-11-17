@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-const style = "underline decoration-1 underline-offset-[4px] transition-colors hover:text-accent hover:decoration-accent";
+const style = "underline decoration-1 underline-offset-[4px] hover:text-hover hover:decoration-hover";
 
 /** a link to another site, opening in a new tab; a page on this site (/...) or an in-page link (#...) stays here */
 export function Out({ href, children, className }: { href: string; children: ReactNode; className?: string }) {

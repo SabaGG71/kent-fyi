@@ -23,7 +23,7 @@ export function ProjectPage({ page }: { page: ProjectPageData }) {
       <SiteHeader />
       <main id="main" className="px-(--m) pt-[clamp(28px,5svh,64px)] pb-[clamp(72px,9vw,140px)]">
         <p className="t-small">
-          <Link href={`/#${page.id}`} className="text-fg/70 transition-colors hover:text-accent">
+          <Link href={`/#${page.id}`} className="text-fg/70 hover:text-hover">
             <span aria-hidden>&larr;&nbsp;</span>All projects
           </Link>
         </p>
