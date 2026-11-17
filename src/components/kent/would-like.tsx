@@ -18,7 +18,7 @@ export function WouldLike() {
         {NEXT.map((idea, i) => (
           <li key={idea.slug} className="border-b border-fg/15 last:border-b-0">
             <details name="would-like" className="group">
-              <summary className="flex cursor-pointer list-none items-baseline gap-4 py-3 hover:text-hover [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-baseline gap-4 py-3 hover:text-accent [&::-webkit-details-marker]:hidden">
                 <span className="t-label w-7 shrink-0 text-fg/50 group-hover:text-inherit">{String(i + 1).padStart(2, "0")}</span>
                 <span className="t-lead flex-1">{idea.title}</span>
                 <span aria-hidden className="t-label shrink-0 text-fg/60 group-open:rotate-45 group-hover:text-inherit">

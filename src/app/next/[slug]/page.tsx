@@ -92,7 +92,7 @@ async function Idea({ params }: { params: PageProps<"/next/[slug]">["params"] })
         {next.slug !== idea.slug && (
           <p className="mt-[clamp(56px,7vw,104px)] border-t border-fg/20 pt-4">
             <span className="t-label block text-fg/60">Next idea</span>
-            <Link href={`/next/${next.slug}`} className="mt-2 inline-block text-[clamp(28px,3.2vw,52px)] leading-none tracking-[-0.03em] hover:text-hover">
+            <Link href={`/next/${next.slug}`} className="mt-2 inline-block text-[clamp(28px,3.2vw,52px)] leading-none tracking-[-0.03em] hover:text-accent">
               {next.title}
               <span aria-hidden>&nbsp;&rarr;</span>
             </Link>

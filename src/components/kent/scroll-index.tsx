@@ -48,7 +48,7 @@ export function ScrollIndex({ sections }: { sections: { id: string; label: strin
         {sections.map((s, i) => (
           <li key={s.id}>
             <a href={`#${s.id}`} aria-current={i === active ? "location" : undefined} className={cn("t-label flex items-center gap-3 py-1 pr-1 hover:text-hover", i === active ? "text-fg" : "text-fg/55")}>
-              <span aria-hidden className={cn("size-[7px] rounded-full", i === active ? "bg-hover" : "bg-transparent")} />
+              <span aria-hidden className={cn("size-[7px] rounded-full", i === active ? "bg-accent" : "bg-transparent")} />
               {s.label}
             </a>
           </li>

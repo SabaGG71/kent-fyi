@@ -40,7 +40,7 @@ export function ProjectIndex({ projects, fallback, compact = false, children }: 
                     className={cn(
                       "mt-2",
                       compact ? "text-[clamp(28px,3.2vw,52px)] leading-none tracking-[-0.03em]" : "t-display",
-                      lit ? "text-hover" : active ? "text-fg/40" : "text-fg",
+                      lit ? "text-accent" : active ? "text-fg/40" : "text-fg",
                     )}
                   >
                     {p.page ? <Link href={p.page}>{p.name}</Link> : p.name}
