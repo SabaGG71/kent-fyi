@@ -3,6 +3,7 @@ import { ABOUT, ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, IN
 import { Out, SectionHead } from "./links";
 import { PhotoStrip } from "./photo-strip";
 import { ProjectIndex } from "./project-index";
+import { InstagramReel } from "./instagram-reel";
 import { Video } from "./videos";
 import { WouldLike } from "./would-like";
 
@@ -90,8 +91,15 @@ export function Modeling() {
     <section id="modeling" aria-labelledby="modeling-title" className={section}>
       <SectionHead id="modeling-title">Modeling and acting</SectionHead>
       <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-10 lg:grid-cols-12">
-        <div className="relative aspect-[4/5] overflow-hidden lg:col-span-5">
-          <Image src={MODELING.photo.src} alt={MODELING.photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" style={{ objectPosition: MODELING.photo.position }} />
+        <div className="flex flex-col gap-(--g) lg:col-span-5">
+          <div className="relative aspect-[4/5] overflow-hidden">
+            <Image src={MODELING.photo.src} alt={MODELING.photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" style={{ objectPosition: MODELING.photo.position }} />
+          </div>
+          {/* the Borjomi campaign, playing in place */}
+          <div className="mx-auto w-full max-w-[460px]">
+            <p className="t-label mb-2 text-fg/60">{MODELING.reel.title}</p>
+            <InstagramReel url={MODELING.reel.url} title={MODELING.reel.title} />
+          </div>
         </div>
         <div className="flex flex-col gap-10 lg:col-span-6 lg:col-start-7">
           <dl className="grid grid-cols-[8.5em_1fr] gap-y-2">

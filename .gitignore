@@ -43,3 +43,6 @@ next-env.d.ts
 # Kent's original photos and PDFs (about 200 MB). The site uses the prepared copies in public/kent.
 /public/images/
 /public/Bear image.jpeg
+
+# Kent drops new photos here; they get resized into public/kent/photos
+/incoming/

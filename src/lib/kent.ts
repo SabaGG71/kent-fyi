@@ -95,12 +95,12 @@ export const CURRENT: Project[] = [
     id: "wine",
     name: "WINE.FYI",
     kind: "Natural wine project",
-    what: "A natural white wine. Fresh, acidic and white, like the label says.",
+    what: "Ori Tsolikouri, a natural white made from two kinds of one grape. Bright, fresh, acidic, stark, crunchy, salty, intense. 2025 vintage, 222 bottles.",
     links: [
       { label: "About the wine", href: "/wine" },
       { label: "wine.fyi", href: "https://wine.fyi" },
     ],
-    photo: { src: "/kent/photos/wine.webp", alt: "A crate of white wine bottles with lilac caps, one labelled Fresh Acidic White" },
+    photo: { src: "/kent/photos/wine.webp", alt: "A turquoise crate of white wine bottles with lilac caps, one labelled Fresh Acidyc White, Ori Tsolikouri" },
     page: "/wine",
   },
   {
@@ -155,7 +155,7 @@ export const EARLIER: Project[] = [
       { label: "Good Housekeeping", href: "https://www.goodhousekeeping.com/what-to-buy/kitchen-products/g32403995/best-instant-coffee/" },
       { label: "NPR’s How I Built This", href: "" },
     ],
-    photo: { src: "/kent/photos/voila-glass.webp", alt: "A VOILA Labs box wrapped in black and white marble, lying on blue glass" },
+    photo: { src: "/kent/photos/voila-hand.webp", alt: "One hand holding a small VOILA box, another reaching for it, on a pale blue ground" },
   },
   {
     id: "swift",
@@ -179,10 +179,16 @@ export const GEORGIA = {
   // for now; Kent is sending a selection from his Instagram
   photos: [
     { src: "/kent/photos/kent-street.webp", alt: "A man in a dark jacket on an old street in Georgia, by a shop sign that reads Vintage Crush", position: "55% 50%" },
+    { src: "/kent/photos/georgia-horse.webp", alt: "A boy riding a horse bareback across a mountain meadow, a village and pine forest behind", position: "45% 50%" },
+    { src: "/kent/photos/georgia-church.webp", alt: "A small wooden church with a cross on its roof, under white clouds" },
     { src: "/kent/photos/kent-red.webp", alt: "Kent and a friend with glasses of red wine, in red light", position: "40% 50%" },
+    { src: "/kent/photos/georgia-cow-hill.webp", alt: "A brown cow grazing on a steep green hillside, pines and cloud above" },
     { src: "/kent/photos/kent-balcony.webp", alt: "Two men at a railing, looking out into fog" },
+    { src: "/kent/photos/georgia-meadow.webp", alt: "A cow grazing on a rolling green meadow, a mast on the hilltop", position: "65% 50%" },
     { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" },
+    { src: "/kent/photos/georgia-cows.webp", alt: "Three brown cows on a road by a mossy rock face", position: "70% 50%" },
     { src: "/kent/photos/kent-booth.webp", alt: "Kent, arms crossed, in a red leather booth under old wooden windows", position: "50% 40%" },
+    { src: "/kent/photos/georgia-bmw.webp", alt: "A red BMW with its door open in a mountain car park, a bouncy castle behind it", position: "35% 50%" },
     { src: "/kent/photos/dinner-table.webp", alt: "A long table set in a courtyard under vines, guests along both sides, candles and wine down the middle", position: "50% 72%" },
   ] satisfies Photo[],
 };
@@ -199,11 +205,13 @@ export const YOUTUBE = {
 };
 
 export const MODELING = {
-  photo: { src: "/kent/photos/kent-train.webp", alt: "Kent in a white shirt in profile, a train passing behind him", position: "78% 50%" } satisfies Photo,
+  photo: { src: "/kent/photos/kent-pool.webp", alt: "Kent in a pink shirt on a lounger by a pool at golden hour, a woman in yellow walking past behind him", position: "60% 50%" } satisfies Photo,
   photos: [
     { src: "/kent/photos/kent-walk.webp", alt: "Kent walking past a red parasol on a terrace" },
     { src: "/kent/photos/kent-chama.webp", alt: "On set for Chama: Kent at a table, a photographer and a crew member with a light", position: "45% 50%" },
   ] satisfies Photo[],
+  /** the Borjomi campaign reel, played on the page */
+  reel: { title: "Borjomi, campaign", url: "https://www.instagram.com/reel/DaQQ6Ols8hV/" },
   card: [
     { label: "Based in", value: "Tbilisi, Georgia" },
     { label: "Management", value: MANAGER, href: `mailto:${MANAGER}` },
@@ -275,6 +283,13 @@ export const ARCHIVE = {
     { src: "/kent/photos/voila-pouch.webp", alt: "Two hands opening a coffee pouch against a blue sky" },
     { src: "/kent/photos/voila-tray.webp", alt: "VOILA Labs boxes in a white moulded tray" },
     { src: "/kent/photos/voila-brick.webp", alt: "A VOILA Labs box on bricks against black and white marble" },
+    { src: "/kent/photos/kent-sea.webp", alt: "Two men on pale rocks above clear turquoise water" },
+    { src: "/kent/photos/voila-lotus.webp", alt: "VOILA boxes and pouches among lotus-root slices on blue, seen from above" },
+    { src: "/kent/photos/swift-team.webp", alt: "Kent in a Swift t-shirt, arms crossed, in a stripped-out kitchen" },
+    { src: "/kent/photos/voila-bichroic.webp", alt: "Coffee capsules stacked on iridescent red and violet film" },
+    { src: "/kent/photos/kent-snow.webp", alt: "Kent in ski goggles and a grey shell jacket, in a snowy birch wood" },
+    { src: "/kent/photos/voila-blue.webp", alt: "A VOILA Labs box in black and white marble paper against rippled blue glass" },
+    { src: "/kent/photos/kent-train-bw.webp", alt: "Kent in profile in black and white, a train passing behind him", position: "78% 50%" },
   ] satisfies Photo[],
 };
 
@@ -306,23 +321,36 @@ export const WINE_PAGE: ProjectPageData = {
   id: wine.id,
   name: wine.name,
   kind: wine.kind,
-  description: [wine.what],
+  description: [
+    "Ori Tsolikouri is a single grape blend: two kinds of Tsolikouri in one bottle. A third is Golden Tsolikouri from Imereti, two thirds Green Tsolikouri from Lechkhumi.",
+    "Bright, fresh, acidic, stark, crunchy, salty, intense. Fresh, acidic and white, like the label says.",
+  ],
   links: [{ label: "wine.fyi", href: "https://wine.fyi" }],
   sections: [
     {
       id: "the-wine",
       title: "The wine",
       details: [
+        { label: "Name", value: "Ori Tsolikouri" },
         { label: "Style", value: "Natural white" },
-        { label: "Vintage", value: null },
+        { label: "Vintage", value: "2025" },
+        { label: "Bottles", value: "222" },
         { label: "Release date", value: null },
-        { label: "Grape", value: "Tsolikouri" },
       ],
     },
     {
       id: "the-grape",
       title: "The grape",
-      body: "Tsolikouri is a white grape from western Georgia, grown mostly in Imereti. It holds on to its acidity, which is what keeps this wine fresh.",
+      details: [
+        { label: "Grape", value: "Tsolikouri, a single grape blend" },
+        { label: "One third", value: "Golden Tsolikouri, from Imereti" },
+        { label: "Two thirds", value: "Green Tsolikouri, from Lechkhumi" },
+      ],
+    },
+    {
+      id: "tasting",
+      title: "In the glass",
+      body: "Bright, fresh, acidic, stark, crunchy, salty, intense.",
     },
     { id: "where-to-buy", title: "Where to buy", body: null },
     {
@@ -331,7 +359,15 @@ export const WINE_PAGE: ProjectPageData = {
       details: [{ label: "Watch", value: "This Is Where Wine Was Born (I Made It Here)", href: "https://www.youtube.com/watch?v=s7SWJymYjB0" }],
     },
   ],
-  photos: [wine.photo, { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" }],
+  photos: [
+    wine.photo,
+    { src: "/kent/photos/wine-label.webp", alt: "The label: Fresh Acidyc White, Ori Tsolikouri, in black on lilac" },
+    { src: "/kent/photos/wine-pour.webp", alt: "A glass poured for two people at a tasting, plants in the window behind" },
+    { src: "/kent/photos/wine-glasses.webp", alt: "Two glasses of pale pink wine and a dark bottle on a blue table, from above" },
+    { src: "/kent/photos/wine-table.webp", alt: "Hands pouring and reaching across a table crowded with bottles and glasses", position: "40% 50%" },
+    { src: "/kent/photos/wine-laugh.webp", alt: "A woman in glasses laughing at a tasting, a man smiling behind her", position: "35% 50%" },
+    { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" },
+  ],
 };
 
 export const DINNER_PAGE: ProjectPageData = {

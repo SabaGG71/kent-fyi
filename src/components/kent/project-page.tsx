@@ -83,7 +83,7 @@ export function ProjectPage({ page }: { page: ProjectPageData }) {
         {rest.length > 1 && (
           <section aria-labelledby="photos-title" className="mt-[clamp(56px,7vw,104px)]">
             <SectionHead id="photos-title">Photographs</SectionHead>
-            <PhotoStrip photos={rest} label={`${page.name}, in photographs`} className="mt-6" />
+            <PhotoStrip scroll={rest.length > 3} photos={rest} label={`${page.name}, in photographs`} className="mt-6" />
           </section>
         )}
       </main>
