@@ -155,7 +155,7 @@ export const EARLIER: Project[] = [
       { label: "Good Housekeeping", href: "https://www.goodhousekeeping.com/what-to-buy/kitchen-products/g32403995/best-instant-coffee/" },
       { label: "NPR’s How I Built This", href: "" },
     ],
-    photo: { src: "/kent/photos/voila-hand.webp", alt: "One hand holding a small VOILA box, another reaching for it, on a pale blue ground" },
+    photo: { src: "/kent/photos/voila-hand.webp", alt: "Two hands passing a VOILA Discovery box against a warm cream wall, one lifting its lid", position: "50% 42%" },
   },
   {
     id: "swift",
@@ -273,7 +273,8 @@ export const ARCHIVE = {
   photos: [
     { src: "/kent/photos/voila-sculpture.webp", alt: "A cup, capsules and boxes balanced into a sculpture" },
     { src: "/kent/photos/swift-van.webp", alt: "A Swift van and a dumpster at a job site" },
-    { src: "/kent/photos/voila-stir.webp", alt: "A hand stirring a mug of black coffee with a green straw" },
+    { src: "/kent/photos/voila-stir.webp", alt: "A hand stirring a glass mug of black coffee with a green straw" },
+    { src: "/kent/photos/voila-cirque.webp", alt: "A packet of VOILA Cirque tipped into a teal glass mug held by another hand" },
     { src: "/kent/photos/swift-plans.webp", alt: "Two crew members in hard hats reading plans on the floor" },
     { src: "/kent/photos/voila-sage.webp", alt: "A box of VOILA instant coffee among stones on a sage background" },
     { src: "/kent/photos/voila-metal.webp", alt: "Coffee capsules stacked in rows on black" },
@@ -335,7 +336,7 @@ export const WINE_PAGE: ProjectPageData = {
         { label: "Style", value: "Natural white" },
         { label: "Vintage", value: "2025" },
         { label: "Bottles", value: "222" },
-        { label: "Release date", value: null },
+        { label: "Release", value: "December 2026" },
       ],
     },
     {
