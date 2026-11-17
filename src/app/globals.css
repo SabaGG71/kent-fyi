@@ -2,13 +2,13 @@
 
 /*
   kent.fyi. Black throughout, white type, colour from the photographs and the projects themselves, and one
-  accent: pure yellow, for whatever you're pointing at.
+  accent: a pale blue-grey, for whatever you're pointing at.
 */
 
 @theme inline {
   --color-bg: #000000;
   --color-fg: #ffffff;
-  --color-accent: #ffff00;
+  --color-accent: #d7e0eb;
   /* the game at /run keeps its own light palette */
   --color-paper: #ebeae7;
   --color-ink: #0b0e10;

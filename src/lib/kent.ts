@@ -16,7 +16,7 @@ export type Photo = { src: string; alt: string; position?: string };
 
 export const INTRO = "I’m Kent. I’m currently based in Tbilisi, Georgia, working on various projects.";
 /** beside the introduction, until a project is pointed at */
-export const INTRO_PHOTO: Photo = { src: "/kent/photos/kent-booth.webp", alt: "Kent in a black T-shirt, arms crossed, in a red booth", position: "50% 30%" };
+export const INTRO_PHOTO: Photo = { src: "/kent/photos/kent-sky.webp", alt: "Kent in low evening sun against a deep blue sky", position: "56% 50%" };
 
 export type Project = {
   id: string;
@@ -28,6 +28,8 @@ export type Project = {
   /** where to explore it */
   links: Link[];
   photo: Photo;
+  /** its own page on this site, if it has one */
+  page?: string;
 };
 
 /** the current selection, in Kent's order */
@@ -37,16 +39,24 @@ export const CURRENT: Project[] = [
     name: "WINE.FYI",
     kind: "Natural wine project",
     what: "A natural white wine. Fresh, acidic and white, like the label says.",
-    links: [{ label: "wine.fyi", href: "https://wine.fyi" }],
+    links: [
+      { label: "About the wine", href: "/wine" },
+      { label: "wine.fyi", href: "https://wine.fyi" },
+    ],
     photo: { src: "/kent/photos/wine.webp", alt: "A crate of white wine bottles with lilac caps, one labelled Fresh Acidic White" },
+    page: "/wine",
   },
   {
     id: "dinner",
     name: "DINNER.FYI",
     kind: "Dinner series",
     what: "In 18th century Birmingham, the Lunar Society met for dinner once a month: builders, inventors and tinkerers at one table, on the night nearest the full moon, so they could ride home by its light.",
-    links: [{ label: "dinner.fyi", href: "https://dinner.fyi" }],
+    links: [
+      { label: "About the dinners", href: "/dinner" },
+      { label: "dinner.fyi", href: "https://dinner.fyi" },
+    ],
     photo: { src: "/kent/photos/dinner.webp", alt: "A painting of Galileo showing his telescope to the Doge of Venice and his court, by moonlight" },
+    page: "/dinner",
   },
   {
     id: "content",
@@ -204,4 +214,98 @@ export const ARCHIVE = {
 
 export const CONTACT = {
   line: "For partnerships, collaborations, speaking arrangements and modeling.",
+};
+
+/*
+  The project pages: a title, what it is, then the particulars, and a few photographs. A value of null is
+  one Kent hasn't given yet. It stays off the page until he does, so nothing on these pages is a guess.
+*/
+export type Detail = { label: string; value: string | null; href?: string };
+export type PageSection = { id: string; title: string; aside?: string; body?: string | null; details?: Detail[] };
+export type ProjectPageData = {
+  id: string;
+  name: string;
+  kind: string;
+  /** what it is, a paragraph each */
+  description: string[];
+  links: Link[];
+  sections: PageSection[];
+  photos: Photo[];
+};
+
+const wine = CURRENT[0];
+const dinner = CURRENT[1];
+
+export const WINE_PAGE: ProjectPageData = {
+  id: wine.id,
+  name: wine.name,
+  kind: wine.kind,
+  description: [wine.what],
+  links: [{ label: "wine.fyi", href: "https://wine.fyi" }],
+  sections: [
+    {
+      id: "the-wine",
+      title: "The wine",
+      details: [
+        { label: "Style", value: "Natural white" },
+        { label: "Vintage", value: null },
+        { label: "Release date", value: null },
+        { label: "Grape", value: "Tsolikouri" },
+      ],
+    },
+    { id: "the-grape", title: "The grape", body: null },
+    { id: "where-to-buy", title: "Where to buy", body: null },
+  ],
+  photos: [wine.photo, { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" }],
+};
+
+export const DINNER_PAGE: ProjectPageData = {
+  id: dinner.id,
+  name: dinner.name,
+  kind: dinner.kind,
+  description: [
+    dinner.what,
+    "We’re restarting it: a monthly dinner for builders and experimenters early in their journeys. Ten to fifteen people, highly curated, and one remarkable guest. People around the table have been working on reversing brain ageing, building rocket ships and discovering new materials with AI.",
+  ],
+  links: [{ label: "dinner.fyi", href: "https://dinner.fyi" }],
+  sections: [
+    {
+      id: "format",
+      title: "The format",
+      details: [
+        { label: "Invitation", value: "Invite only" },
+        { label: "How often", value: "Monthly" },
+        { label: "At the table", value: "Ten to fifteen people, and one remarkable guest" },
+      ],
+    },
+    {
+      id: "no-1",
+      title: "No. 1",
+      body: null,
+      details: [
+        { label: "Date", value: null },
+        { label: "Place", value: null },
+        { label: "Guest", value: null },
+      ],
+    },
+    {
+      id: "no-2",
+      title: "No. 2",
+      aside: "Upcoming",
+      details: [
+        { label: "Date", value: "The next full moon" },
+        { label: "Place", value: null },
+        { label: "Guest", value: null },
+      ],
+    },
+  ],
+  photos: [dinner.photo],
+};
+
+/** the site's share card, for pages that set their own share title */
+export const SHARE_CARD = {
+  url: "/opengraph-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "kent.fyi. I'm Kent, based in Tbilisi, Georgia. Current selection: WINE.FYI, DINNER.FYI, KENT.FYI, LocalEyes. Before that, VOILA and Swift Demolition.",
 };

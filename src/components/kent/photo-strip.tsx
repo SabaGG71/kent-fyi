@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const DWELL = 4500;
 
 /**
- * A row of photographs. From a small tablet up it's a plain grid. On a phone it's a strip you swipe, one
+ * A row of photographs. From a small tablet up it's a plain grid, a column each (two at least). On a phone it's a strip you swipe, one
  * photograph at a time with the next one peeking in, no scrollbar, a thin segment per photograph under it
  * (the one in front fills yellow while it waits), and it moves on by itself every few seconds while it's
  * on screen. A finger on it holds it. Reduced motion: no autoplay.
@@ -104,10 +104,11 @@ export function PhotoStrip({ photos, label, className }: { photos: Photo[]; labe
         }}
         onTouchEnd={() => setHeld(false)}
         onTouchCancel={() => setHeld(false)}
-        className="relative -mx-(--m) flex snap-x snap-mandatory scroll-px-(--m) gap-(--g) overflow-x-auto overscroll-x-contain px-(--m) [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden"
+        style={{ "--n": Math.max(photos.length, 2) } as React.CSSProperties}
+        className="relative -mx-(--m) flex snap-x snap-mandatory scroll-px-(--m) gap-(--g) overflow-x-auto overscroll-x-contain px-(--m) [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-[repeat(var(--n),minmax(0,1fr))] sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden"
       >
         {photos.map((p) => (
-          <li key={p.src} className="relative aspect-[4/5] w-[78vw] shrink-0 snap-start overflow-hidden sm:w-auto">
+          <li key={p.src} className={cn("relative aspect-[4/5] shrink-0 snap-start overflow-hidden sm:w-auto", photos.length > 1 ? "w-[78vw]" : "w-full")}>
             <Image src={p.src} alt={p.alt} fill sizes="(min-width: 640px) 33vw, 78vw" className="object-cover" style={{ objectPosition: p.position }} />
           </li>
         ))}

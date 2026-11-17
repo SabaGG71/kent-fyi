@@ -1,11 +1,19 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const style = "underline decoration-1 underline-offset-[4px] transition-colors hover:text-accent hover:decoration-accent";
 
-/** a link to another site, opening in a new tab; an in-page link (#...) stays on the page */
+/** a link to another site, opening in a new tab; a page on this site (/...) or an in-page link (#...) stays here */
 export function Out({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
   if (!href) return <span className={className}>{children}</span>;
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} className={cn(style, className)}>
+        {children}
+      </Link>
+    );
+  }
   if (href.startsWith("#") || href.startsWith("mailto:")) {
     return (
       <a href={href} className={cn(style, className)}>

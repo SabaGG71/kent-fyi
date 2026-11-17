@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Photo, Project } from "@/lib/kent";
 import { cn } from "@/lib/utils";
 import { Out } from "./links";
@@ -42,7 +43,7 @@ export function ProjectIndex({ projects, fallback, compact = false, children }: 
                       lit ? "text-accent" : active ? "text-fg/40" : "text-fg",
                     )}
                   >
-                    {p.name}
+                    {p.page ? <Link href={p.page}>{p.name}</Link> : p.name}
                   </h3>
                   <p className="t-lead mt-4 max-w-[52ch] text-fg/85">{p.what}</p>
                   <p className="t-small mt-3 flex flex-wrap gap-x-5 gap-y-1">
