@@ -168,8 +168,8 @@ export const CURRENT: Project[] = [
   {
     id: "localeyes",
     name: "LOCALEYES",
-    kind: "Marketing agency",
-    what: "The company I needed when I had my coffee cart in 2014. We work only with coffee carts, dessert carts and mobile bars, and get them found on Google and booked for more events.",
+    kind: "Growth agency",
+    what: "A boutique growth agency for mobile event businesses. We've stacked #1 rankings for clients in almost every major city in the US, and built the industry's leading websites for caterers and ecommerce brands.",
     links: [
       { label: "localeyesgrowth.com", href: "https://localeyesgrowth.com" },
       { label: "The LocalEyes Podcast", href: "https://www.youtube.com/watch?v=WtfVjOL8TiU" },
@@ -184,8 +184,8 @@ export const EARLIER: Project[] = [
     id: "voila",
     name: "VOILA",
     kind: "Specialty instant coffee",
-    // Kent's words, from the voila.coffee About page he wrote
-    what: "Specialty instant coffee. Every cup meticulously crafted from the best specialty coffees in the world to precise extractions, upholding quality from farm to cup. If you have water, you can have amazing coffee in seconds.",
+    // shortened from the story Kent wrote for voila.coffee
+    what: "Specialty instant coffee. I started VOILA in 2016 to make great coffee approachable, then spent almost two years developing a new processing technique so instant could taste like the coffee it came from. It launched in 2017: a clean, transparent, vibrant filter-style cup, and proof that instant could be specialty.",
     links: [
       { label: "@voila.coffee on Instagram", href: VOILA_INSTAGRAM },
       { label: "The 90-point review", href: "https://www.coffeereview.com/review/cirque-tarrazu-f1-natural/" },
