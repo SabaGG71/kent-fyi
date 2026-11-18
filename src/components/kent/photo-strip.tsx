@@ -125,11 +125,11 @@ export function PhotoStrip({ photos, label, className, scroll = false }: { photo
       </ul>
 
       {photos.length > 1 && (
-        <div className={cn("mt-3 flex items-center justify-between", !scroll && "sm:hidden")}>
-          <div className="-ml-1 flex">
+        <div className={cn("mt-3 flex items-center justify-between gap-4", !scroll && "sm:hidden")}>
+          <div className="-ml-1 flex min-w-0 flex-1">
             {photos.map((p, i) => (
-              <button key={p.src} type="button" onClick={() => go(i)} aria-label={`Photo ${i + 1} of ${photos.length}`} aria-current={i === active || undefined} className="group px-1 py-3">
-                <span className="relative block h-[2px] w-9 overflow-hidden bg-fg/25">
+              <button key={p.src} type="button" onClick={() => go(i)} aria-label={`Photo ${i + 1} of ${photos.length}`} aria-current={i === active || undefined} className="group max-w-11 flex-1 px-1 py-3">
+                <span className="relative block h-[2px] w-full overflow-hidden bg-fg/25">
                   {i === active && (
                     <span key={`${active}-${filling}`} className={cn("absolute inset-0 origin-left bg-accent", filling && "animate-[strip-fill_4.5s_linear_both]")} />
                   )}
@@ -137,7 +137,7 @@ export function PhotoStrip({ photos, label, className, scroll = false }: { photo
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-4">
             <p className="t-label text-fg/65" aria-hidden>
               {String(active + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
             </p>
