@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, YOUTUBE } from "@/lib/kent";
+import { ArchiveGrid } from "./archive-grid";
 import { Out, SectionHead } from "./links";
 import { PhotoStrip } from "./photo-strip";
 import { ProjectIndex } from "./project-index";
@@ -11,9 +12,15 @@ const section = "scroll-mt-4 px-(--m) pb-[clamp(72px,9vw,140px)]";
 /** Kent, briefly, then what he's working on now: the index, a photograph on the right for each */
 export function Work() {
   return (
-    <section id="work" aria-labelledby="work-title" className="scroll-mt-4 px-(--m) pt-[clamp(40px,8svh,96px)] pb-[clamp(72px,9vw,140px)]">
+    <section id="work" aria-labelledby="work-title" className="scroll-mt-4 px-(--m) pb-[clamp(72px,9vw,140px)] lg:pt-[clamp(40px,8svh,96px)]">
+      {/* on a phone the photograph is the first screen, edge to edge, under the header, the introduction over its dark foot */}
+      <div className="relative -mx-(--m) -mt-(--header) h-svh min-h-[520px] overflow-hidden lg:hidden">
+        <Image src={INTRO_PHOTO.src} alt={INTRO_PHOTO.alt} fill loading="eager" fetchPriority="high" sizes="(max-width: 1023px) 175vw, 1px" className="object-cover object-[46%_50%]" />
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-[58%] bg-linear-to-t from-black via-black/75 to-transparent" />
+        <p className="absolute right-(--m) bottom-[max(28px,env(safe-area-inset-bottom))] left-(--m) animate-[rise_900ms_var(--ease-out-expo)_both] text-[clamp(24px,6.9vw,40px)] leading-[1.05] tracking-[-0.03em] text-balance">{INTRO}</p>
+      </div>
       <ProjectIndex projects={CURRENT} fallback={INTRO_PHOTO}>
-        <p className="t-display max-w-[22ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance">{INTRO}</p>
+        <p className="t-display hidden max-w-[22ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance lg:block">{INTRO}</p>
         <div id="next" className="scroll-mt-6">
           <WouldLike />
         </div>
@@ -177,13 +184,7 @@ export function Archive() {
       <SectionHead id="archive-title" aside={`${ARCHIVE.photos.length} images`}>
         Image archive, issue {ARCHIVE.issue}
       </SectionHead>
-      <ul className="mt-[clamp(22px,2.6vw,36px)] columns-2 gap-(--g) md:columns-3 xl:columns-4">
-        {ARCHIVE.photos.map((p) => (
-          <li key={p.src} className="mb-(--g) break-inside-avoid">
-            <Image src={p.src} alt={p.alt} width={1200} height={1500} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />
-          </li>
-        ))}
-      </ul>
+      <ArchiveGrid photos={ARCHIVE.photos} />
     </section>
   );
 }

@@ -11,7 +11,7 @@ const LINKS = [
 /** the address as the logo, and a short row of links. It scrolls away with the page. */
 export function SiteHeader() {
   return (
-    <header className="flex items-baseline justify-between gap-6 px-(--m) pt-4 text-[15px] leading-none">
+    <header className="relative z-10 flex h-(--header) items-end justify-between gap-6 px-(--m) text-[15px] leading-none">
       <Link href="/" translate="no" className="hover:text-hover">
         kent.fyi
       </Link>

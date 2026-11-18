@@ -24,6 +24,8 @@
   /* the page margin and the gutter */
   --m: max(clamp(16px, 2vw, 32px), env(safe-area-inset-left));
   --g: clamp(12px, 1.4vw, 24px);
+  /* the header's height: on a phone the first photograph slides up under it */
+  --header: 31px;
 }
 
 @layer base {
