@@ -40,15 +40,15 @@ export function ScrollIndex({ sections }: { sections: { id: string; label: strin
       aria-label="On this page"
       className={cn(
         // bottom right, under the project photograph that stays beside the index at the top of the page
-        "fixed right-(--m) bottom-(--m) z-40 hidden border border-fg bg-bg px-5 py-4 xl:block",
+        "fixed right-(--m) bottom-(--m) z-40 hidden border border-fg bg-bg px-3.5 py-2.5 xl:block",
         shown ? "visible opacity-100" : "invisible opacity-0",
       )}
     >
       <ol className="relative">
         {sections.map((s, i) => (
           <li key={s.id}>
-            <a href={`#${s.id}`} aria-current={i === active ? "location" : undefined} className={cn("t-label flex items-center gap-3 py-1 pr-1 hover:text-hover", i === active ? "text-fg" : "text-fg/55")}>
-              <span aria-hidden className={cn("size-[7px] rounded-full", i === active ? "bg-accent" : "bg-transparent")} />
+            <a href={`#${s.id}`} aria-current={i === active ? "location" : undefined} className={cn("t-label flex items-center gap-2 py-[2px] pr-1 text-[11px] hover:text-hover", i === active ? "text-fg" : "text-fg/55")}>
+              <span aria-hidden className={cn("size-[6px] rounded-full", i === active ? "bg-accent" : "bg-transparent")} />
               {s.label}
             </a>
           </li>
