@@ -84,11 +84,11 @@ export function YouTube() {
   );
 }
 
-/** modeling and acting: the main photograph, the card, the numbers, the work */
+/** modeling: the main photograph, the card, the numbers, the work */
 export function Modeling() {
   return (
     <section id="modeling" aria-labelledby="modeling-title" className={section}>
-      <SectionHead id="modeling-title">Modeling and acting</SectionHead>
+      <SectionHead id="modeling-title">Modeling</SectionHead>
       <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-10 lg:grid-cols-12">
         <div className="flex flex-col gap-(--g) lg:col-span-5">
           <div className="relative aspect-[4/5] overflow-hidden">
@@ -177,8 +177,7 @@ export function Archive() {
       <SectionHead id="archive-title" aside={`${ARCHIVE.photos.length} images`}>
         Image archive, issue {ARCHIVE.issue}
       </SectionHead>
-      <p className="t-lead mt-[clamp(22px,2.6vw,36px)] text-fg/85">{ARCHIVE.line}</p>
-      <ul className="mt-[clamp(24px,3vw,44px)] columns-2 gap-(--g) md:columns-3 xl:columns-4">
+      <ul className="mt-[clamp(22px,2.6vw,36px)] columns-2 gap-(--g) md:columns-3 xl:columns-4">
         {ARCHIVE.photos.map((p) => (
           <li key={p.src} className="mb-(--g) break-inside-avoid">
             <Image src={p.src} alt={p.alt} width={1200} height={1500} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />

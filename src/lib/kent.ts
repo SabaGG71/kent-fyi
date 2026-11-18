@@ -1,7 +1,7 @@
 /**
  * Everything kent.fyi says, in one place, in the order Kent set out: a short introduction, the current
  * selection (WINE.FYI, DINNER.FYI, KENT.FYI, LocalEyes), the earlier projects (VOILA, Swift), modeling and
- * acting, about, press and podcasts, the image archive, and how to reach him.
+ * about, press and podcasts, the image archive, and how to reach him.
  *
  * All of it comes from Kent: his notes on the site, his portfolio deck, the sites he runs and the podcasts
  * he listed. Where a detail wasn't given (a year, a role) it is left out rather than guessed.
@@ -303,28 +303,39 @@ export const FEATURES = [
  */
 export const ARCHIVE = {
   issue: 1,
-  line: "Coffee, demolition, a few faces. Completely unorganized.",
+  // an unfiltered dump: a little of every project, mostly whatever was on the phone
   photos: [
+    { src: "/kent/photos/dump-tank-top.webp", alt: "Kent in sunglasses and a white tank top, on the phone under a yellow porch roof" },
     { src: "/kent/photos/voila-sculpture.webp", alt: "A cup, capsules and boxes balanced into a sculpture" },
-    { src: "/kent/photos/swift-van.webp", alt: "A Swift van and a dumpster at a job site" },
-    { src: "/kent/photos/voila-stir.webp", alt: "A hand stirring a glass mug of black coffee with a green straw" },
-    { src: "/kent/photos/voila-cirque.webp", alt: "A packet of VOILA Cirque tipped into a teal glass mug held by another hand" },
-    { src: "/kent/photos/swift-plans.webp", alt: "Two crew members in hard hats reading plans on the floor" },
-    { src: "/kent/photos/voila-sage.webp", alt: "A box of VOILA instant coffee among stones on a sage background" },
-    { src: "/kent/photos/voila-metal.webp", alt: "Coffee capsules stacked in rows on black" },
-    { src: "/kent/photos/swift-ladder.webp", alt: "A crew member carrying a yellow bucket past orange ladders" },
-    { src: "/kent/photos/voila-pour.webp", alt: "Water poured into a glass mug of instant coffee" },
-    { src: "/kent/photos/voila-concrete.webp", alt: "A VOILA Labs box on a cork disc" },
-    { src: "/kent/photos/voila-pouch.webp", alt: "Two hands opening a coffee pouch against a blue sky" },
-    { src: "/kent/photos/voila-tray.webp", alt: "VOILA Labs boxes in a white moulded tray" },
-    { src: "/kent/photos/voila-brick.webp", alt: "A VOILA Labs box on bricks against black and white marble" },
+    { src: "/kent/photos/dump-cove.webp", alt: "A turquoise cove full of swimmers below pale rock" },
+    { src: "/kent/photos/dump-oxygen-wifi.webp", alt: "Two glowing pills on grey, one red marked OXYGEN, one blue marked WI-FI" },
+    { src: "/kent/photos/dump-courtyard.webp", alt: "Old Tbilisi houses with wooden balconies, seen through a dark archway" },
+    { src: "/kent/photos/dump-cheers.webp", alt: "Kent raising a small glass in a garden, another hand clinking it" },
     { src: "/kent/photos/kent-sea.webp", alt: "Two men on pale rocks above clear turquoise water" },
+    { src: "/kent/photos/dump-grinder.webp", alt: "A coffee grinder's burr, seen from above, with handwritten red and green notes" },
+    { src: "/kent/photos/dump-cans.webp", alt: "Rows of drink cans and a water bottle lined up on a wooden bench" },
+    { src: "/kent/photos/dump-jewelry-call.webp", alt: "A red poster: looking for a Georgian jewelry designer to collaborate with, two black and white photos of Kent" },
+    { src: "/kent/photos/dump-kazbegi.webp", alt: "Carved stone heads on a mountainside below a snowy peak" },
     { src: "/kent/photos/voila-lotus.webp", alt: "VOILA boxes and pouches among lotus-root slices on blue, seen from above" },
-    { src: "/kent/photos/swift-team.webp", alt: "Kent in a Swift t-shirt, arms crossed, in a stripped-out kitchen" },
-    { src: "/kent/photos/voila-bichroic.webp", alt: "Coffee capsules stacked on iridescent red and violet film" },
+    { src: "/kent/photos/dump-range.webp", alt: "Two people in ear defenders at a shooting range" },
+    { src: "/kent/photos/dump-dusk.webp", alt: "Sun rays fanning up from a dark treeline at dusk" },
+    { src: "/kent/photos/dump-corner.webp", alt: "A sandstone corner house with a red phone box and green shutters" },
     { src: "/kent/photos/kent-snow.webp", alt: "Kent in ski goggles and a grey shell jacket, in a snowy birch wood" },
-    { src: "/kent/photos/voila-blue.webp", alt: "A VOILA Labs box in black and white marble paper against rippled blue glass" },
+    { src: "/kent/photos/dump-sweeter.webp", alt: "Walter White aiming a pistol in the desert, captioned MAKE IT SWEETER" },
+    { src: "/kent/photos/dump-garden.webp", alt: "Two men at a table of food and wine on a terrace, trees behind" },
+    { src: "/kent/photos/dump-mirror.webp", alt: "A pickup truck in a side mirror, a hand holding a phone inside it" },
+    { src: "/kent/photos/voila-bichroic.webp", alt: "Coffee capsules stacked on iridescent red and violet film" },
+    { src: "/kent/photos/dump-bottles.webp", alt: "Natural wine bottles and glasses on a long wooden table in the dark" },
+    { src: "/kent/photos/dump-red-bag.webp", alt: "Walking in jeans and a black tank top with a red bag over one shoulder" },
+    { src: "/kent/photos/swift-team.webp", alt: "Kent in a Swift t-shirt, arms crossed, in a stripped-out kitchen" },
+    { src: "/kent/photos/dump-pourover.webp", alt: "A pour-over brewing into a glass carafe on an outdoor stove, a plastic bag over the cone" },
+    { src: "/kent/photos/dump-harbour.webp", alt: "Kent in cream trousers standing on a harbour wall, cranes across the water" },
+    { src: "/kent/photos/dump-swatches.webp", alt: "A grid of colour swatches: violets, greens, blues, pinks and ochres" },
+    { src: "/kent/photos/voila-pouch.webp", alt: "Two hands opening a coffee pouch against a blue sky" },
+    { src: "/kent/photos/dump-market.webp", alt: "A street stall of patterned fabrics and a red bag laid out in sun" },
+    { src: "/kent/photos/dump-screen.webp", alt: "A man in silhouette in front of a huge projected spreadsheet" },
     { src: "/kent/photos/kent-train-bw.webp", alt: "Kent in profile in black and white, a train passing behind him", position: "78% 50%" },
+    { src: "/kent/photos/dump-discs.webp", alt: "Two marbled discs, teal and grey, with a small white box on a pink ground" },
   ] satisfies Photo[],
 };
 

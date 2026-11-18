@@ -20,7 +20,7 @@ const SECTIONS = [
 /**
  * kent.fyi: Kent, briefly, what he'd like to work on next, then what he's working on now (WINE.FYI,
  * DINNER.FYI, KENT.FYI, LocalEyes), Georgia in photographs, YouTube, what came before (VOILA, Swift),
- * modeling and acting, features, the image archive, and how to reach him. Black throughout; the
+ * modeling, features, the image archive, and how to reach him. Black throughout; the
  * colour is in the photographs.
  */
 export default function Home() {
