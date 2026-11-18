@@ -247,8 +247,9 @@ export const YOUTUBE = {
 };
 
 export const MODELING = {
-  photo: { src: "/kent/photos/kent-pool.webp", alt: "Kent in a pink shirt on a lounger by a pool at golden hour, a woman in yellow walking past behind him", position: "60% 50%" } satisfies Photo,
+  photo: { src: "/kent/photos/kent-pool.webp", alt: "Kent in a striped shirt on a lounger by a pool at golden hour, a can of Borjomi Aromati in hand, a woman in yellow walking past behind him", position: "60% 40%" } satisfies Photo,
   photos: [
+    { src: "/kent/photos/kent-borjomi-drink.webp", alt: "Kent drinking a can of Borjomi beside a rooftop pool, a plate of fruit on the table", position: "90% 50%" },
     { src: "/kent/photos/kent-walk.webp", alt: "Kent walking past a red parasol on a terrace" },
     { src: "/kent/photos/kent-chama.webp", alt: "On set for Chama: Kent at a table, a photographer and a crew member with a light", position: "45% 50%" },
   ] satisfies Photo[],

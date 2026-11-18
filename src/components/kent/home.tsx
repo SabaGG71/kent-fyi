@@ -137,10 +137,10 @@ export function Modeling() {
               ))}
             </ul>
           </div>
-          <ul className="grid grid-cols-2 gap-(--g)">
-            {MODELING.photos.map((p) => (
-              <li key={p.src} className="relative aspect-[4/5] overflow-hidden">
-                <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 24vw, 50vw" className="object-cover" style={{ objectPosition: p.position }} />
+          <ul className="grid grid-cols-2 gap-(--g) sm:grid-cols-3">
+            {MODELING.photos.map((p, i) => (
+              <li key={p.src} className={i === 0 ? "relative col-span-2 aspect-[4/5] overflow-hidden sm:col-span-1" : "relative aspect-[4/5] overflow-hidden"}>
+                <Image src={p.src} alt={p.alt} fill sizes={i === 0 ? "(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 100vw" : "(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw"} className="object-cover" style={{ objectPosition: p.position }} />
               </li>
             ))}
           </ul>
