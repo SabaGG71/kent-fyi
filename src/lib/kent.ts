@@ -41,53 +41,84 @@ export type Project = {
  * are Kent's to add; until he does, a page is just the idea.
  */
 export type Reference = Photo & { caption?: string };
+export type IdeaSection = { title: string; body: string[] };
 export type Idea = {
   slug: string;
   /** finishes the sentence "I would like to…" */
   title: string;
-  /** one line, shown when the row opens */
+  /** one line, for search and share cards */
   short: string;
-  /** the idea, a paragraph each */
-  body: string[];
-  references: Reference[];
+  /** its own page, in Kent's words. An idea without one is just a line in the list */
+  page?: {
+    /** the idea, a paragraph each */
+    body: string[];
+    sections: IdeaSection[];
+    /** the last word: how to get in touch */
+    close?: string;
+    references: Reference[];
+  };
 };
 
 export const NEXT: Idea[] = [
   {
     slug: "jewelry",
-    title: "Make jewelry with a Georgian designer",
-    short: "A collection made with a super creative jewelry designer, ideally here in Georgia.",
-    body: ["I’d like to make a jewelry project with a super creative jewelry designer, ideally one working in Georgia."],
-    references: [],
+    title: "Release a limited custom jewelry piece with a Georgian designer",
+    short: "One piece, limited, co-designed with a Georgian designer. Something to wear every single day.",
+    page: {
+      body: [
+        "I want to make a piece of jewelry. One piece, limited, co-designed with a Georgian designer. Probably a bracelet but I’m not married to it, could be a ring or a chain if that’s where it goes.",
+        "The only real rule is I have to want to wear it every single day. Not a statement piece, not something for photos. The thing on my wrist when I’m at the office, at the court, at a supra, on a plane. And it has to have some connection to my life here and to Georgia. Not in a souvenir way. Nobody wants a tiny qvevri charm. More like, if you know you know.",
+      ],
+      sections: [
+        {
+          title: "Where my head is at, taste wise",
+          body: [
+            "If I had to put it in a sentence: niche luxury you have to be in the know to clock, a bit playful, grounded in daily routine. Weight to it. Texture over polish. Silver probably. Maybe one tiny detail that’s only for me.",
+          ],
+        },
+        {
+          title: "How the collab works",
+          body: [
+            "You design and make it with me. I promote it. I film the whole thing, the workshop, the sketches, us figuring it out, the drop. I take a piece or two or three for myself. You keep the sales. I’m not asking for a cut, maybe we talk about it later if it makes sense but that’s not what this is about. It’s about making something I want to exist and putting someone I believe in on to a bigger audience.",
+            "My audience is foreigners living in Georgia and people in Europe and the States who are looking at Georgia. IG is doing around 2M views a month, 16K followers heading to 20K. YouTube is smaller but those people actually move here. When it’s out I want to do a proper press release here and in Europe. Not merch energy, more like Georgian craft meets a guy who built a life here.",
+          ],
+        },
+        {
+          title: "Selling it",
+          body: [
+            "Online I think we lean on whatever you already have, your stockists, Farfetch if you’re on it, plus a page on my site that everything points to. In person I want to do a small launch here, probably a dinner, the piece on the table, and maybe a short pop-up at a store you’re already in.",
+          ],
+        },
+        {
+          title: "Timeline",
+          body: [
+            "Months not weeks. I want to wear the thing for a while before we call it done. I’m very patient with this and I’m only doing it with someone I actually connect with and trust. Not looking for the world. Just want it to be nice.",
+          ],
+        },
+        {
+          title: "What comes after",
+          body: [
+            "This is the first physical thing under FYI. After this it’s fragrance or interior objects. Then interior design, maybe real estate projects. Who knows. But the first one has to be right.",
+          ],
+        },
+      ],
+      close: "If this sounds like you, DM me. Coffee, or I come by your studio.",
+      references: [],
+    },
   },
   {
     slug: "fragrance",
-    title: "Make a fragrance",
-    short: "A scent of my own, made with a perfumer.",
-    body: ["I’d like to make a fragrance."],
-    references: [],
+    title: "Design a memorable fragrance for everyday wear",
+    short: "A fragrance of my own: memorable, and made for every day.",
+    page: {
+      body: ["I’d like to design a fragrance. Something memorable, made for everyday wear."],
+      sections: [],
+      references: [],
+    },
   },
-  {
-    slug: "interiors",
-    title: "Design an object for the home",
-    short: "One interiors object, made well.",
-    body: ["I’d like to make an interiors object."],
-    references: [],
-  },
-  {
-    slug: "real-estate",
-    title: "Take on a real estate project",
-    short: "A building or a space, start to finish.",
-    body: ["I’d like to do a real estate project."],
-    references: [],
-  },
-  {
-    slug: "cafe",
-    title: "Open a café or coffee concept",
-    short: "Back to where I started: coffee, this time with a room around it.",
-    body: ["I started with a coffee cart in 2014 and went on to make VOILA. I’d like to come back to coffee with a café or a coffee concept."],
-    references: [],
-  },
+  { slug: "object", title: "Co-design a somewhat useless object for home", short: "A somewhat useless object for the home, co-designed." },
+  { slug: "real-estate", title: "Take on a real estate project in Tbilisi", short: "A real estate project in Tbilisi." },
+  { slug: "cafe", title: "Collaborate on a forward thinking cafe or coffee concept", short: "A forward thinking cafe or coffee concept." },
 ];
 
 /** the current selection, in Kent's order */
@@ -365,11 +396,21 @@ export const WINE_PAGE: ProjectPageData = {
   photos: [
     wine.photo,
     { src: "/kent/photos/wine-label.webp", alt: "The label: Fresh Acidyc White, Ori Tsolikouri, in black on lilac" },
+    { src: "/kent/photos/wine-chat-plans.webp", alt: "A screenshot of the IGAVI x KENT.FYI group chat planning releases: 222 bottles of Ori Tsolikouri in November, more in spring and fall" },
+    { src: "/kent/photos/winery-thief.webp", alt: "Kent filming as the winemaker draws wine from a barrel with a glass thief at the cellar door" },
+    { src: "/kent/photos/winery-taste.webp", alt: "Kent nosing a glass of white wine outside the stone cellar" },
     { src: "/kent/photos/wine-pour.webp", alt: "A glass poured for two people at a tasting, plants in the window behind" },
+    { src: "/kent/photos/winery-dog.webp", alt: "A wooden granary and a stone cellar in a green yard, a dog in the grass" },
     { src: "/kent/photos/wine-glasses.webp", alt: "Two glasses of pale pink wine and a dark bottle on a blue table, from above" },
-    { src: "/kent/photos/wine-table.webp", alt: "Hands pouring and reaching across a table crowded with bottles and glasses", position: "40% 50%" },
-    { src: "/kent/photos/wine-laugh.webp", alt: "A woman in glasses laughing at a tasting, a man smiling behind her", position: "35% 50%" },
-    { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves", position: "45% 55%" },
+    { src: "/kent/photos/winery-sip.webp", alt: "Kent tasting from a glass against the cellar wall, camera in hand" },
+    { src: "/kent/photos/wine-laptop.webp", alt: "A bottle of Fresh Acidyc White on a laptop screen, the label design open beside it" },
+    { src: "/kent/photos/winery-walk.webp", alt: "Someone walking into the stone cellar past the wooden granary" },
+    { src: "/kent/photos/wine-table.webp", alt: "Hands pouring and reaching across a table crowded with bottles and glasses" },
+    { src: "/kent/photos/winery-pour.webp", alt: "The winemaker holding up a glass of white wine by the cellar door" },
+    { src: "/kent/photos/wine-chat-styles.webp", alt: "A screenshot of the group chat trading reference bottles for a spring Nuria style and a winter Dzelshavi style" },
+    { src: "/kent/photos/wine-laugh.webp", alt: "A woman in glasses laughing at a tasting, a man smiling behind her" },
+    { src: "/kent/photos/winery-table.webp", alt: "Glasses of rosé and a bottle on a wooden table in the yard, the cellar behind" },
+    { src: "/kent/photos/vines.webp", alt: "Kent and a friend under autumn grapevines, in red work gloves" },
     { src: "/kent/photos/wine-bar.webp", alt: "A wooden bar lined with open bottles and glasses, lit by flash at night" },
     { src: "/kent/photos/wine-orange.webp", alt: "Glasses of amber wine and a bottle on a pale table" },
   ],
@@ -416,7 +457,7 @@ export const DINNER_PAGE: ProjectPageData = {
       ],
     },
   ],
-  photos: [dinner.photo, { src: "/kent/photos/dinner.webp", alt: "A painting of Galileo showing his telescope to the Doge of Venice and his court, by moonlight" }],
+  photos: [dinner.photo],
 };
 
 /** the site's share card, for pages that set their own share title */
