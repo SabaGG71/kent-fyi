@@ -5,7 +5,12 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    qualities: [75, 90],
+    // Photographs are sized ahead of time (npm run photos) and served as files: Vercel's on-request resizing is
+    // a paid quota that ran out. The widths here are the copies that exist; 2400 is the original.
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    imageSizes: [384],
+    deviceSizes: [640, 1080, 1600, 2400],
   },
   turbopack: {
     rules: {

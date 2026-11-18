@@ -38,7 +38,7 @@ export function ProjectIndex({ projects, fallback, compact = false, children }: 
                   <p className="t-label text-fg/65">{p.kind}</p>
                   <h3
                     className={cn(
-                      "mt-2 transition-colors duration-300",
+                      "mt-2",
                       compact ? "text-[clamp(28px,3.2vw,52px)] leading-none tracking-[-0.03em]" : "t-display",
                       lit ? "text-accent" : active ? "text-fg/40" : "text-fg",
                     )}
@@ -53,6 +53,17 @@ export function ProjectIndex({ projects, fallback, compact = false, children }: 
                       </Out>
                     ))}
                   </p>
+                  {p.press && p.press.length > 0 && (
+                    <p className="t-small mt-3 max-w-[60ch] text-fg/60">
+                      <span className="t-label mr-2 text-fg/50">Press</span>
+                      {p.press.map((l, i) => (
+                        <span key={l.label}>
+                          {l.href ? <Out href={l.href}>{l.label}</Out> : l.label}
+                          {i < p.press!.length - 1 && <span aria-hidden>,&ensp;</span>}
+                        </span>
+                      ))}
+                    </p>
+                  )}
                 </div>
                 {/* on a phone, the photograph sits beside its project */}
                 <div className="relative mt-1 aspect-[4/5] w-[28vw] max-w-[160px] overflow-hidden lg:hidden">

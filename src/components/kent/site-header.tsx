@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 const LINKS = [
-  { label: "Work", href: "/#work" },
-  { label: "Georgia", href: "/#georgia" },
+  { label: "Projects", href: "/#projects" },
   { label: "Modeling", href: "/#modeling" },
-  { label: "Press", href: "/#press" },
+  { label: "YouTube", href: "/#youtube" },
   { label: "Archive", href: "/#archive" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -13,14 +12,14 @@ const LINKS = [
 export function SiteHeader() {
   return (
     <header className="flex items-baseline justify-between gap-6 px-(--m) pt-4 text-[15px] leading-none">
-      <Link href="/" translate="no" className="hover:text-accent">
+      <Link href="/" translate="no" className="hover:text-hover">
         kent.fyi
       </Link>
       <nav aria-label="Primary">
         <ul className="flex flex-wrap justify-end gap-x-5 gap-y-2">
           {LINKS.map((l) => (
-            <li key={l.href} className={l.label === "Georgia" || l.label === "Archive" ? "hidden sm:block" : undefined}>
-              <Link href={l.href} className="text-fg/80 transition-colors hover:text-accent">
+            <li key={l.href} className={l.label === "YouTube" || l.label === "Archive" ? "hidden sm:block" : undefined}>
+              <Link href={l.href} className="text-fg/80 hover:text-hover">
                 {l.label}
               </Link>
             </li>

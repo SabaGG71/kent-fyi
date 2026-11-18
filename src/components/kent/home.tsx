@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { ABOUT, ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, PODCASTS } from "@/lib/kent";
+import { ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, YOUTUBE } from "@/lib/kent";
 import { Out, SectionHead } from "./links";
 import { PhotoStrip } from "./photo-strip";
 import { ProjectIndex } from "./project-index";
+import { Video } from "./videos";
+import { WouldLike } from "./would-like";
 
 const section = "scroll-mt-4 px-(--m) pb-[clamp(72px,9vw,140px)]";
 
@@ -11,8 +13,11 @@ export function Work() {
   return (
     <section id="work" aria-labelledby="work-title" className="scroll-mt-4 px-(--m) pt-[clamp(40px,8svh,96px)] pb-[clamp(72px,9vw,140px)]">
       <ProjectIndex projects={CURRENT} fallback={INTRO_PHOTO}>
-        <p className="t-display max-w-[17ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance">{INTRO}</p>
-        <div className="mt-[clamp(48px,7vw,104px)]">
+        <p className="t-display max-w-[22ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance">{INTRO}</p>
+        <div id="next" className="scroll-mt-6">
+          <WouldLike />
+        </div>
+        <div id="projects" className="mt-[clamp(48px,7vw,104px)] scroll-mt-6">
           <SectionHead id="work-title">Current selection</SectionHead>
         </div>
       </ProjectIndex>
@@ -56,19 +61,39 @@ export function Georgia() {
           </p>
         </div>
       </div>
-      <PhotoStrip photos={GEORGIA.photos} label="Georgia, in photographs" className="mt-[clamp(28px,3.4vw,52px)]" />
+      <PhotoStrip scroll photos={GEORGIA.photos} label="Georgia, in photographs" className="mt-[clamp(28px,3.4vw,52px)]" />
     </section>
   );
 }
 
-/** modeling and acting: the main photograph, the card, the numbers, the work */
+/** KENT.FYI on YouTube: three videos and the channel */
+export function YouTube() {
+  return (
+    <section id="youtube" aria-labelledby="youtube-title" className={section}>
+      <SectionHead id="youtube-title" aside={<Out href={YOUTUBE.channel}>{YOUTUBE.handle}</Out>}>
+        On YouTube
+      </SectionHead>
+      <ul className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-8 md:grid-cols-3">
+        {YOUTUBE.videos.map((v) => (
+          <li key={v.id}>
+            <Video id={v.id} title={v.title} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** modeling: the main photograph, the card, the numbers, the work */
 export function Modeling() {
   return (
     <section id="modeling" aria-labelledby="modeling-title" className={section}>
-      <SectionHead id="modeling-title">Modeling and acting</SectionHead>
+      <SectionHead id="modeling-title">Modeling</SectionHead>
       <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-10 lg:grid-cols-12">
-        <div className="relative aspect-[4/5] overflow-hidden lg:col-span-5">
-          <Image src={MODELING.photo.src} alt={MODELING.photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" style={{ objectPosition: MODELING.photo.position }} />
+        <div className="flex flex-col gap-(--g) lg:col-span-5">
+          <div className="relative aspect-[4/5] overflow-hidden">
+            <Image src={MODELING.photo.src} alt={MODELING.photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" style={{ objectPosition: MODELING.photo.position }} />
+          </div>
         </div>
         <div className="flex flex-col gap-10 lg:col-span-6 lg:col-start-7">
           <dl className="grid grid-cols-[8.5em_1fr] gap-y-2">
@@ -125,44 +150,22 @@ export function Modeling() {
   );
 }
 
-/** Kent, in one sentence */
-export function About() {
-  return (
-    <section id="about" aria-labelledby="about-title" className={section}>
-      <SectionHead id="about-title">About Kent</SectionHead>
-      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) lg:grid-cols-12">
-        <p className="text-[clamp(22px,2.1vw,32px)] leading-[1.25] tracking-[-0.015em] text-balance lg:col-span-8">{ABOUT}</p>
-      </div>
-    </section>
-  );
-}
-
-/** where he's been written up and talked: text links only */
+/** a few conversations, small and quiet: year, show, title */
 export function Press() {
   return (
     <section id="press" aria-labelledby="press-title" className={section}>
-      <SectionHead id="press-title">Features and podcasts</SectionHead>
-      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) gap-y-10 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <p className="t-label text-fg/60">Features</p>
-          <ul className="t-lead mt-3 space-y-1.5">
-            {FEATURES.map((f) => (
-              <li key={f.label}>{f.href ? <Out href={f.href}>{f.label}</Out> : <span>{f.label}</span>}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="lg:col-span-7 lg:col-start-6">
-          <p className="t-label text-fg/60">Podcasts</p>
-          <ul className="mt-3 space-y-3">
-            {PODCASTS.map((p) => (
-              <li key={p.id} className="t-lead">
-                <span className="text-fg/60">{p.show}. </span>
-                <Out href={`https://www.youtube.com/watch?v=${p.id}`}>{p.title}</Out>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <SectionHead id="press-title">Features</SectionHead>
+      <ul className="t-small mt-3 lg:w-2/3">
+        {FEATURES.map((f) => (
+          <li key={f.id} className="grid grid-cols-[3.5em_1fr] gap-x-3 border-b border-fg/10 py-2 last:border-b-0 sm:grid-cols-[3.5em_14em_1fr]">
+            <span className="text-fg/50 tabular-nums">{f.year}</span>
+            <span className="text-fg/60">{f.show}</span>
+            <span className="col-start-2 sm:col-start-auto">
+              <Out href={`https://www.youtube.com/watch?v=${f.id}`}>{f.title}</Out>
+            </span>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
@@ -174,8 +177,7 @@ export function Archive() {
       <SectionHead id="archive-title" aside={`${ARCHIVE.photos.length} images`}>
         Image archive, issue {ARCHIVE.issue}
       </SectionHead>
-      <p className="t-lead mt-[clamp(22px,2.6vw,36px)] text-fg/85">{ARCHIVE.line}</p>
-      <ul className="mt-[clamp(24px,3vw,44px)] columns-2 gap-(--g) md:columns-3 xl:columns-4">
+      <ul className="mt-[clamp(22px,2.6vw,36px)] columns-2 gap-(--g) md:columns-3 xl:columns-4">
         {ARCHIVE.photos.map((p) => (
           <li key={p.src} className="mb-(--g) break-inside-avoid">
             <Image src={p.src} alt={p.alt} width={1200} height={1500} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-auto w-full" />
@@ -195,7 +197,7 @@ export function Contact() {
         <div className="lg:col-span-8">
           <p className="t-lead text-fg/85">{CONTACT.line}</p>
           <p className="t-label mt-6 text-fg/60">Management</p>
-          <a href={`mailto:${MANAGER}`} className="mt-2 inline-block text-[clamp(30px,3.6vw,56px)] leading-none tracking-[-0.03em] underline decoration-2 underline-offset-[0.14em] transition-colors hover:text-accent">
+          <a href={`mailto:${MANAGER}`} className="mt-2 inline-block text-[clamp(30px,3.6vw,56px)] leading-none tracking-[-0.03em] underline decoration-2 underline-offset-[0.14em] hover:text-hover">
             {MANAGER}
           </a>
         </div>
