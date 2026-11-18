@@ -20,17 +20,17 @@ export function WouldLike() {
           return (
             <li key={idea.slug} className="border-b border-fg/15 last:border-b-0">
               {idea.page ? (
-                <Link href={`/next/${idea.slug}`} className="group flex items-baseline gap-4 py-3 hover:text-hover">
+                <Link href={`/next/${idea.slug}`} className="group flex items-baseline gap-4 py-2.5 hover:text-hover">
                   <span className="t-label w-7 shrink-0 text-fg/50 group-hover:text-hover">{n}</span>
-                  <span className="t-lead flex-1">{idea.title}</span>
+                  <span className="t-small flex-1">{idea.title}</span>
                   <span aria-hidden className="t-label shrink-0 text-fg/60 group-hover:text-hover">
                     &rarr;
                   </span>
                 </Link>
               ) : (
-                <div className="flex items-baseline gap-4 py-3">
+                <div className="flex items-baseline gap-4 py-2.5">
                   <span className="t-label w-7 shrink-0 text-fg/50">{n}</span>
-                  <span className="t-lead flex-1">{idea.title}</span>
+                  <span className="t-small flex-1">{idea.title}</span>
                 </div>
               )}
             </li>

@@ -88,14 +88,29 @@ async function Idea({ params }: { params: PageProps<"/next/[slug]">["params"] })
           ))}
 
           {page.references.length > 0 && (
-            <ul aria-label="References" className="mt-[clamp(40px,5vw,72px)] space-y-[clamp(32px,4vw,56px)]">
-              {page.references.map((r) => (
-                <li key={r.src}>
-                  <Image src={r.src} alt={r.alt} width={1600} height={1200} quality={90} sizes="(min-width: 800px) 760px, 100vw" className="h-auto w-full" />
-                  {r.caption && <p className="t-label mt-2 text-fg/60">{r.caption}</p>}
-                </li>
-              ))}
-            </ul>
+            <section aria-labelledby="references-title" className="mt-[clamp(40px,5vw,64px)]">
+              <SectionHead id="references-title" aside={`${page.references.length} images`}>
+                References
+              </SectionHead>
+              <ul className="mt-4 grid grid-cols-2 gap-x-(--g) gap-y-6">
+                {page.references.map((r) => (
+                  <li key={r.src}>
+                    <Image src={r.src} alt={r.alt} width={1290} height={1460} sizes="(min-width: 800px) 380px, 50vw" className="h-auto w-full" />
+                    {(r.caption || r.credit) && (
+                      <p className="mt-2 text-[11px] leading-snug text-fg/55">
+                        {r.caption}
+                        {r.caption && r.credit && <span aria-hidden>, </span>}
+                        {r.credit && (
+                          <a href={r.credit.href} target="_blank" rel="noreferrer" className="underline decoration-1 underline-offset-2 hover:text-hover hover:decoration-hover">
+                            {r.credit.label}
+                          </a>
+                        )}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
 
           <section aria-labelledby="make-it-title" className="mt-[clamp(48px,6vw,88px)]">

@@ -40,7 +40,8 @@ export type Project = {
  * is, then the references, one under the other with a short caption, then how to make it happen. References
  * are Kent's to add; until he does, a page is just the idea.
  */
-export type Reference = Photo & { caption?: string };
+/** a reference image: someone else's work, so it carries a small credit linking back to them */
+export type Reference = Photo & { caption?: string; credit?: Link };
 export type IdeaSection = { title: string; body: string[] };
 export type Idea = {
   slug: string;
@@ -103,7 +104,15 @@ export const NEXT: Idea[] = [
         },
       ],
       close: "If this sounds like you, DM me. Coffee, or I come by your studio.",
-      references: [],
+      references: [
+        { src: "/kent/photos/jewelry-bleue-ashdown.webp", alt: "A silver link bracelet of textured, branch-like bars joined by small rings", caption: "Bleue Burnham, Ashdown Oak bracelet", credit: { label: "@bleueburnham", href: "https://www.instagram.com/bleueburnham/" } },
+        { src: "/kent/photos/jewelry-bleue-ashdown-wrist.webp", alt: "Two Ashdown Oak bracelets, silver and gold, worn together on a wrist", caption: "Bleue Burnham, Ashdown Oak, worn", credit: { label: "@bleueburnham", href: "https://www.instagram.com/bleueburnham/" } },
+        { src: "/kent/photos/jewelry-ninu-signet.webp", alt: "A molten-textured silver signet ring set with a small citrine, NINU stamped inside", caption: "Ninu, silver signet with citrine", credit: { label: "@ninu_the_jeweler", href: "https://www.instagram.com/ninu_the_jeweler/" } },
+        { src: "/kent/photos/jewelry-homer-heart.webp", alt: "A heart-shaped stone ring on a ribbed band, shown from the front and the back", caption: "Homer, heart ring", credit: { label: "@homer", href: "https://www.instagram.com/homer/" } },
+        { src: "/kent/photos/jewelry-bleue-rose-garden.webp", alt: "A textured signet set with pink stones, on a hand in a jeans pocket", caption: "Bleue Burnham, Rose Garden Signet", credit: { label: "@bleueburnham", href: "https://www.instagram.com/bleueburnham/" } },
+        { src: "/kent/photos/jewelry-bleue-sky.webp", alt: "A gold signet with a nugget-textured face set with six blue diamonds", caption: "Bleue Burnham, signet with blue diamonds", credit: { label: "@bleueburnham", href: "https://www.instagram.com/bleueburnham/" } },
+        { src: "/kent/photos/jewelry-ron-louis.webp", alt: "Two rings on a hand against concrete, a kite-shaped stone and an emerald-cut blue stone", caption: "Ron Louis, pinky rings", credit: { label: "@ron_louis", href: "https://www.instagram.com/ron_louis/" } },
+      ],
     },
   },
   {
