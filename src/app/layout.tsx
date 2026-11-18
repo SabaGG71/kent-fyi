@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Fragment_Mono, Instrument_Sans } from "next/font/google";
-import { SmoothScroll } from "@/components/site/smooth-scroll";
 import "./globals.css";
 
 // Instrument Sans for everything you read, Fragment Mono (a Helvetica cut as a monospace) for the
@@ -43,7 +42,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
-        <SmoothScroll />
         {children}
       </body>
     </html>
