@@ -252,8 +252,6 @@ export const MODELING = {
     { src: "/kent/photos/kent-walk.webp", alt: "Kent walking past a red parasol on a terrace" },
     { src: "/kent/photos/kent-chama.webp", alt: "On set for Chama: Kent at a table, a photographer and a crew member with a light", position: "45% 50%" },
   ] satisfies Photo[],
-  /** the Borjomi campaign reel, played on the page */
-  reel: { title: "Borjomi, campaign", url: "https://www.instagram.com/reel/DaQQ6Ols8hV/" },
   card: [
     { label: "Based in", value: "Tbilisi, Georgia" },
     { label: "Management", value: MANAGER, href: `mailto:${MANAGER}` },
@@ -274,11 +272,6 @@ export const MODELING = {
         { label: "Reel 2", href: "https://www.instagram.com/reel/DaclWzrMyX8/" },
         { label: "Reel 3", href: "https://www.instagram.com/reel/Daclz2_sFl-/" },
       ],
-    },
-    {
-      name: "Selkirk Sports × MZE Pickleball Club",
-      role: "Creative direction and campaign production",
-      links: [{ label: "View", href: "https://www.instagram.com/p/DVgh9zJiOjh/" }],
     },
     {
       name: "Imedi L, Visitor",
