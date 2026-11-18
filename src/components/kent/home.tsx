@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ABOUT, ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, YOUTUBE } from "@/lib/kent";
+import { ARCHIVE, CONTACT, CURRENT, EARLIER, EMAIL, FEATURES, GEORGIA, INSTAGRAM, INTRO, INTRO_PHOTO, MANAGER, MODELING, YOUTUBE } from "@/lib/kent";
 import { Out, SectionHead } from "./links";
 import { PhotoStrip } from "./photo-strip";
 import { ProjectIndex } from "./project-index";
@@ -13,11 +13,11 @@ export function Work() {
   return (
     <section id="work" aria-labelledby="work-title" className="scroll-mt-4 px-(--m) pt-[clamp(40px,8svh,96px)] pb-[clamp(72px,9vw,140px)]">
       <ProjectIndex projects={CURRENT} fallback={INTRO_PHOTO}>
-        <p className="t-display max-w-[17ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance">{INTRO}</p>
+        <p className="t-display max-w-[22ch] animate-[rise_900ms_var(--ease-out-expo)_both] text-balance">{INTRO}</p>
         <div id="next" className="scroll-mt-6">
           <WouldLike />
         </div>
-        <div className="mt-[clamp(48px,7vw,104px)]">
+        <div id="projects" className="mt-[clamp(48px,7vw,104px)] scroll-mt-6">
           <SectionHead id="work-title">Current selection</SectionHead>
         </div>
       </ProjectIndex>
@@ -145,18 +145,6 @@ export function Modeling() {
             ))}
           </ul>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/** Kent, in one sentence */
-export function About() {
-  return (
-    <section id="about" aria-labelledby="about-title" className={section}>
-      <SectionHead id="about-title">About Kent</SectionHead>
-      <div className="mt-[clamp(22px,2.6vw,36px)] grid grid-cols-1 gap-x-(--g) lg:grid-cols-12">
-        <p className="text-[clamp(22px,2.1vw,32px)] leading-[1.25] tracking-[-0.015em] text-balance lg:col-span-8">{ABOUT}</p>
       </div>
     </section>
   );

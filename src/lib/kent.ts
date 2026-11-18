@@ -15,7 +15,7 @@ export const VOILA_INSTAGRAM = "https://www.instagram.com/voila.coffee/";
 export type Link = { label: string; href: string };
 export type Photo = { src: string; alt: string; position?: string };
 
-export const INTRO = "I’m Kent. I’m currently based in Tbilisi, Georgia, working on various projects.";
+export const INTRO = "I’m Kent, a multi-hyphenate creative and entrepreneur based in Tbilisi, Georgia, following my curiosities through products, content and experiences.";
 /** beside the introduction, until a project is pointed at */
 export const INTRO_PHOTO: Photo = { src: "/kent/photos/kent-sky-crop.webp", alt: "Kent in low evening sun against a deep blue sky" };
 
@@ -285,7 +285,6 @@ export const MODELING = {
   ],
 };
 
-export const ABOUT = "Kent is a multi-hyphenate creative and entrepreneur that follows his curiosities to tell compelling stories through products, content, and experiences.";
 
 /**
  * Features: the conversations worth hearing, newest first, kept short. The VOILA write-ups live under VOILA.

@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 const LINKS = [
-  { label: "Work", href: "/#work" },
-  { label: "Georgia", href: "/#georgia" },
+  { label: "Projects", href: "/#projects" },
   { label: "Modeling", href: "/#modeling" },
-  { label: "Features", href: "/#press" },
+  { label: "YouTube", href: "/#youtube" },
   { label: "Archive", href: "/#archive" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -19,7 +18,7 @@ export function SiteHeader() {
       <nav aria-label="Primary">
         <ul className="flex flex-wrap justify-end gap-x-5 gap-y-2">
           {LINKS.map((l) => (
-            <li key={l.href} className={l.label === "Georgia" || l.label === "Archive" ? "hidden sm:block" : undefined}>
+            <li key={l.href} className={l.label === "YouTube" || l.label === "Archive" ? "hidden sm:block" : undefined}>
               <Link href={l.href} className="text-fg/80 hover:text-hover">
                 {l.label}
               </Link>
